@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adam Wolfe</title>
+  <title>Adam Wolfe, JD MBA</title>
   <meta name="description" content="Building the neuro-symbolic AI for medicine." />
   <link rel="canonical" href="https://adamwolfe.com/" />
 
@@ -15,7 +15,7 @@
   <meta property="og:image" content="https://adamwolfe.com/chroneme.JPG" />
 
   <!-- Minimal Monogram Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2318181B'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23FAF9F6' font-family='Georgia, serif' font-size='26' font-weight='500'%3EAW%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230B0B0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23F5F4F0' font-family='Georgia, serif' font-size='26' font-weight='500'%3EAW%3C/text%3E%3C/svg%3E" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,13 +29,26 @@
           fontFamily: {
             sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             serif: ['Newsreader', 'Georgia', 'serif'],
+          },
+          colors: {
+            obsidian: {
+              DEFAULT: '#0B0B0A',
+              surface: '#121211',
+              border: '#222220',
+              muted: '#8E8D87'
+            },
+            alabaster: {
+              DEFAULT: '#F7F6F2',
+              surface: '#EFECE6',
+              border: '#DFDDD6',
+              muted: '#6E6D68'
+            }
           }
         }
       }
     }
   </script>
   <script>
-    // Apply saved theme preference before page render to avoid flash
     (function() {
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'light') {
@@ -46,409 +59,614 @@
     })();
   </script>
   <style>
-    body {
-      background-color: #FAF9F5;
-      color: #1A1A19;
-      transition: background-color 0.2s ease, color 0.2s ease;
+    :root {
+      --bg-primary: #F7F6F2;
+      --bg-elevated: #EFECE6;
+      --text-primary: #141413;
+      --text-secondary: #575652;
+      --text-muted: #85847F;
+      --border-subtle: rgba(20, 20, 19, 0.1);
+      --accent-highlight: rgba(20, 20, 19, 0.06);
     }
-    html.dark body {
-      background-color: #111110;
-      color: #E6E5E0;
+    html.dark {
+      --bg-primary: #0B0B0A;
+      --bg-elevated: #141413;
+      --text-primary: #F5F4F0;
+      --text-secondary: #A8A7A1;
+      --text-muted: #6E6D68;
+      --border-subtle: rgba(245, 244, 240, 0.1);
+      --accent-highlight: rgba(245, 244, 240, 0.07);
+    }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    .editorial-border {
+      border-color: var(--border-subtle);
+    }
+    .entity-pill {
+      background-color: var(--accent-highlight);
+      padding: 0.1rem 0.42rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      color: var(--text-primary);
     }
     .essay-row:hover .essay-title {
       text-decoration: underline;
       text-underline-offset: 4px;
     }
+    /* Staggered word reveal inspired by zohaibakhtar.com */
+    @keyframes wordReveal {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+        filter: blur(3px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+    .reveal-word {
+      display: inline-block;
+      opacity: 0;
+      animation: wordReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   </style>
 </head>
-<body class="font-sans antialiased selection:bg-stone-300 dark:selection:bg-stone-700">
+<body class="font-sans antialiased selection:bg-stone-300 dark:selection:bg-stone-800">
 
-  <!-- Top Navigation (Wider Layout) -->
-  <header class="max-w-4xl mx-auto px-6 pt-8 pb-6 flex items-center justify-between text-sm">
-    <a href="#" class="font-medium tracking-tight text-stone-900 dark:text-stone-100">
-      Adam<span class="font-normal text-stone-500 dark:text-stone-400">Wolfe</span>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-stone-900 focus:text-white focus:rounded-md">
+    Skip to content
+  </a>
+
+  <!-- Top Navigation (Zohaib Akhtar style sticky/minimal bar) -->
+  <header class="max-w-5xl mx-auto px-6 pt-8 pb-6 flex items-center justify-between text-sm">
+    <a href="#" aria-label="Adam Wolfe, home" class="tracking-tight text-stone-900 dark:text-[#F5F4F0] text-base">
+      <span class="font-normal text-stone-600 dark:text-[#A8A7A1]">Adam</span><b class="font-semibold">Wolfe</b>
     </a>
-    <nav class="hidden sm:flex items-center gap-6 text-stone-600 dark:text-stone-400">
-      <a href="#about" class="hover:text-stone-900 dark:hover:text-stone-100 transition">About</a>
-      <a href="#writing" class="hover:text-stone-900 dark:hover:text-stone-100 transition">Writing</a>
-      <a href="#work" class="hover:text-stone-900 dark:hover:text-stone-100 transition">Work</a>
-      <a href="#contact" class="hover:text-stone-900 dark:hover:text-stone-100 transition">Contact</a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-7 text-stone-600 dark:text-[#A8A7A1]">
+      <a href="#about" class="hover:text-stone-950 dark:hover:text-white transition">About</a>
+      <a href="#writing" class="hover:text-stone-950 dark:hover:text-white transition">Writing</a>
+      <a href="#photographs" class="hover:text-stone-950 dark:hover:text-white transition">Photographs</a>
+      <a href="#work" class="hover:text-stone-950 dark:hover:text-white transition">Work</a>
+      <a href="#contact" class="hover:text-stone-950 dark:hover:text-white transition">Contact</a>
     </nav>
-    <div class="flex items-center gap-4 text-xs text-stone-500 dark:text-stone-400">
-      <button onclick="toggleTheme()" id="header-theme-toggle" aria-label="Toggle theme" class="hover:text-stone-900 dark:hover:text-stone-100 transition">
+
+    <div class="flex items-center gap-3 text-xs">
+      <button onclick="toggleTheme()" id="header-theme-toggle" aria-label="Toggle theme" class="px-2.5 py-1 rounded-full border editorial-border text-stone-600 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">
         Light mode
       </button>
-      <span>EN</span>
-      <a href="#contact" class="sm:hidden hover:text-stone-900 dark:hover:text-stone-100">Contact</a>
+      <span class="text-stone-400 dark:text-[#6E6D68] hidden sm:inline">EN</span>
+      <a href="#contact" class="px-3.5 py-1.5 rounded-full bg-stone-900 text-[#F7F6F2] dark:bg-[#F5F4F0] dark:text-[#0B0B0A] font-medium hover:opacity-90 transition">
+        Contact
+      </a>
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-6 pb-24">
+  <main id="main" class="max-w-5xl mx-auto px-6 pb-24">
 
-    <!-- Identity Header + Active Widescreen Hero Video (talking1.mp4) -->
-    <section class="pt-12 pb-14 border-b border-stone-200/90 dark:border-stone-800">
-      <div class="flex flex-col gap-1">
-        <h1 class="text-3xl sm:text-4xl font-medium tracking-tight text-stone-900 dark:text-stone-100">
-          Adam Wolfe <span class="text-sm font-normal text-stone-500 dark:text-stone-400 ml-1">JD MBA</span>
-        </h1>
-        <p class="font-serif text-2xl sm:text-3xl text-stone-700 dark:text-stone-300 mt-2">
-          Building the neuro-symbolic AI for medicine.
-        </p>
-      </div>
-
-      <!-- Hero Video: talking1.mp4 (16:9 Landscape) -->
-      <figure id="video-hero" class="mt-8">
-        <div class="relative overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+    <!-- Hero Section: Responsive Dual-Video + Cinematic Overlay (Zohaib Akhtar Style) -->
+    <section class="pt-4 pb-16 border-b editorial-border">
+      <div class="relative overflow-hidden rounded-2xl border editorial-border bg-[#121211] shadow-2xl">
+        
+        <!-- Desktop Widescreen Hero Video (talking1.mp4) -->
+        <div class="hidden sm:block relative">
           <video 
-            id="hero-video-player"
+            id="hero-video-wide"
             src="talking1.mp4" 
             autoplay 
             loop 
             muted 
             playsinline 
             preload="auto"
-            class="w-full aspect-video object-cover"
-            onerror="document.getElementById('video-hero').style.display='none'"
+            class="w-full aspect-[16/9] object-cover opacity-90"
           ></video>
-          <button 
-            onclick="toggleVideoMute('hero-video-player', 'hero-mute-label')" 
-            aria-label="Toggle audio"
-            class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-black/65 hover:bg-black/80 text-stone-100 text-[11px] backdrop-blur-sm transition flex items-center gap-1.5"
-          >
-            <span id="hero-mute-label">Unmute</span>
-          </button>
         </div>
-        <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
-          <span>Speaking on clinical intelligence, architecture, and high-stakes governance</span>
-          <span class="text-stone-400 dark:text-stone-500">Executive Seminar</span>
-        </figcaption>
-      </figure>
+
+        <!-- Mobile Portrait Hero Video (talking2.mp4) -->
+        <div class="block sm:hidden relative">
+          <video 
+            id="hero-video-tall"
+            src="talking2.mp4" 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            preload="auto"
+            class="w-full aspect-[9/14] object-cover opacity-90"
+          ></video>
+        </div>
+
+        <!-- Subtle bottom gradient for editorial legibility -->
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0B0A]/90 via-[#0B0B0A]/25 to-transparent"></div>
+
+        <!-- Overlaid Identity & Animated Tagline -->
+        <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div class="flex items-baseline gap-2.5">
+              <h1 class="text-3xl sm:text-5xl font-semibold tracking-tight text-[#F5F4F0]">
+                <span class="font-normal text-[#D6D5CE]">Adam</span>Wolfe
+              </h1>
+              <span class="text-xs sm:text-sm uppercase tracking-widest text-[#A8A7A1] font-medium">JD MBA</span>
+            </div>
+            <p aria-label="Building the neuro-symbolic AI for medicine." class="font-serif text-xl sm:text-3xl text-[#F5F4F0] mt-2">
+              <span class="reveal-word" style="animation-delay: 0.08s">Building</span>
+              <span class="reveal-word" style="animation-delay: 0.16s">the</span>
+              <span class="reveal-word" style="animation-delay: 0.24s">neuro-symbolic</span>
+              <span class="reveal-word" style="animation-delay: 0.32s">AI</span>
+              <span class="reveal-word" style="animation-delay: 0.40s">for</span>
+              <span class="reveal-word" style="animation-delay: 0.48s">medicine.</span>
+            </p>
+          </div>
+
+          <!-- Audio Unmute Toggle -->
+          <div class="flex items-center gap-2 self-start sm:self-end">
+            <button 
+              onclick="toggleHeroAudio()" 
+              aria-label="Toggle hero video audio"
+              class="px-3.5 py-1.5 rounded-full bg-black/70 hover:bg-black/90 text-[#F5F4F0] border border-white/15 text-xs backdrop-blur-md transition flex items-center gap-1.5"
+            >
+              <span id="hero-mute-dot" class="w-1.5 h-1.5 rounded-full bg-stone-400"></span>
+              <span id="hero-mute-label">Unmute audio</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- About (First-Person Narrative + Inline Photos) -->
-    <section id="about" class="py-14 border-b border-stone-200/90 dark:border-stone-800">
-      <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-6">About</h2>
-      
-      <div class="space-y-6 text-[17px] leading-[1.8] text-stone-800 dark:text-stone-200 font-normal max-w-3xl">
-        <!-- 1. Chroneme Discussion -->
-        <p>
-          I have spent my career building the architecture, governance, and teams that let complex organizations operate at massive scale without losing sight of what matters. Every chapter of my career has come down to the same truth: high-stakes systems fail when complexity outpaces clarity. <a href="https://chroneme.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Chroneme</a> applies that lesson where the stakes are highest. I am building it as Co-Founder and CEO alongside <a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Zohaib Akhtar</a>, whom I met while earning my MBA at Northwestern’s Kellogg School of Management.
-        </p>
-        <p>
-          Chroneme is an advanced clinical intelligence system powered by neuro-symbolic AI. Unlike black-box models that guess from patterns alone, it pairs deep learning with explicit clinical logic—so it notices early signals in a patient the way a great physician does, and shows its reasoning at every step. Across 124,000 patient encounters and active oncology early-detection trials, we are proving that clinical AI can be both extraordinarily capable and completely transparent.
-        </p>
+    <!-- About (Lead Statement + Side-by-Side Story & Photo Pairs + Editorial Grids) -->
+    <section id="about" class="py-16 border-b editorial-border">
+      <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-6">About</h2>
 
-        <!-- Photo 1: Chroneme (chroneme.JPG) -->
-        <figure id="photo-chroneme" class="my-10 pt-2">
-          <img 
-            src="chroneme.JPG" 
-            alt="Adam Wolfe and Zohaib Akhtar at Chroneme" 
-            onclick="openLightbox(this.src, this.alt)"
-            class="w-full rounded-lg object-cover max-h-[500px] border border-stone-200/80 dark:border-stone-800 cursor-zoom-in"
-            onerror="document.getElementById('photo-chroneme').style.display='none'"
-          />
-          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
+      <!-- Lead Statement (Zohaib style large editorial opener) -->
+      <div class="max-w-3xl mb-14">
+        <p class="font-serif text-2xl sm:text-3xl leading-[1.45] text-stone-900 dark:text-[#F5F4F0]">
+          I have spent my career building the architecture, governance, and teams that let complex organizations operate at massive scale without losing sight of what matters.
+        </p>
+      </div>
+
+      <!-- 1. Chroneme Discussion + Photo 1 (Side-by-Side Split on Desktop) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
+        <div class="lg:col-span-6 space-y-5 text-[16.5px] leading-[1.8] text-stone-700 dark:text-[#C8C7C0]">
+          <p>
+            Every chapter of my career has come down to the same truth: high-stakes systems fail when complexity outpaces clarity. <a href="https://chroneme.com" target="_blank" rel="noopener" class="text-stone-950 dark:text-[#F5F4F0] underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-white font-medium">Chroneme</a> applies that lesson where the stakes are highest. I am building it as Co-Founder and CEO alongside <a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="text-stone-950 dark:text-[#F5F4F0] underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-white font-medium">Zohaib Akhtar</a>, whom I met while earning my MBA at <span class="entity-pill">Northwestern Kellogg</span>.
+          </p>
+          <p>
+            Chroneme is an advanced clinical intelligence system powered by <span class="entity-pill">neuro-symbolic AI</span>. Unlike black-box models that guess from patterns alone, it pairs deep learning with explicit clinical logic—so it notices early signals in a patient the way a great physician does, and shows its reasoning at every step. Across 124,000 patient encounters and active oncology early-detection trials, we are proving that clinical AI can be both extraordinarily capable and completely transparent.
+          </p>
+        </div>
+
+        <figure id="photo-chroneme" class="lg:col-span-6">
+          <div class="overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
+            <img 
+              src="chroneme.JPG" 
+              alt="Adam Wolfe and Zohaib Akhtar at Chroneme" 
+              data-gallery="true"
+              data-caption="With Zohaib Akhtar, my co-founder at Chroneme — building neuro-symbolic clinical intelligence."
+              data-location="Chroneme"
+              onclick="openLightboxBySrc(this.src)"
+              class="w-full h-80 sm:h-96 object-cover cursor-zoom-in hover:scale-[1.015] transition duration-300"
+              onerror="document.getElementById('photo-chroneme').style.display='none'"
+            />
+          </div>
+          <figcaption class="text-xs text-stone-500 dark:text-[#8E8D87] mt-3 flex items-center justify-between">
+            <span class="font-medium text-stone-700 dark:text-[#C8C7C0]">Chroneme</span>
             <span>With Zohaib Akhtar, my co-founder</span>
-            <span class="text-stone-400 dark:text-stone-500">Chroneme</span>
           </figcaption>
         </figure>
+      </div>
 
-        <!-- 2. Marissa & Life Outside Work Discussion -->
-        <p>
-          Alongside Chroneme, I co-founded EASE Compliance Advisors, co-own Teton Group, and advise founders through Court Vision. Outside work, I live in Birmingham, Michigan with my wife of 23 years, Marissa, and our three children. When I’m not working, I’m usually training for the next HYROX race, logging early-morning miles, or out on the golf course.
-        </p>
+      <!-- 2. Marissa & Life Outside Work Discussion + Photo 2 (Side-by-Side Split on Desktop) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
+        <div class="lg:col-span-6 space-y-5 text-[16.5px] leading-[1.8] text-stone-700 dark:text-[#C8C7C0]">
+          <p>
+            Alongside Chroneme, I co-founded <span class="entity-pill">EASE Compliance Advisors</span>, co-own <span class="entity-pill">Teton Group</span>, and advise founders through <span class="entity-pill">Court Vision</span>.
+          </p>
+          <p>
+            Outside work, I live in Birmingham, Michigan with my wife of 23 years, Marissa, and our three children. When I’m not working, I’m usually training for the next HYROX race, logging early-morning miles, or out on the golf course.
+          </p>
+        </div>
 
-        <!-- Photo 2: With Marissa (family.jpeg) -->
-        <figure id="photo-family" class="my-10 pt-2">
-          <img 
-            src="family.jpeg" 
-            alt="Adam Wolfe with his wife Marissa" 
-            loading="lazy"
-            onclick="openLightbox(this.src, this.alt)"
-            class="w-full rounded-lg object-cover max-h-[500px] border border-stone-200/80 dark:border-stone-800 cursor-zoom-in"
-            onerror="document.getElementById('photo-family').style.display='none'"
-          />
-          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
+        <figure id="photo-family" class="lg:col-span-6">
+          <div class="overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
+            <img 
+              src="family.jpeg" 
+              alt="Adam Wolfe with his wife Marissa" 
+              loading="lazy"
+              data-gallery="true"
+              data-caption="With my wife of 23 years, Marissa, in Michigan."
+              data-location="Birmingham, Michigan"
+              onclick="openLightboxBySrc(this.src)"
+              class="w-full h-80 sm:h-96 object-cover cursor-zoom-in hover:scale-[1.015] transition duration-300"
+              onerror="document.getElementById('photo-family').style.display='none'"
+            />
+          </div>
+          <figcaption class="text-xs text-stone-500 dark:text-[#8E8D87] mt-3 flex items-center justify-between">
+            <span class="font-medium text-stone-700 dark:text-[#C8C7C0]">Michigan</span>
             <span>With my wife, Marissa</span>
-            <span class="text-stone-400 dark:text-stone-500">Michigan</span>
           </figcaption>
         </figure>
+      </div>
 
-        <!-- 3. UWM & Career Discussion -->
-        <p>
-          Before founding Chroneme, I served as Executive Vice President, Chief Legal &amp; Administrative Officer, and Board Secretary at United Wholesale Mortgage—helping take the business from private hyper-growth to the nation’s largest mortgage lender and a landmark public listing on the New York Stock Exchange. Earlier in my career, I solved operational problems across technology portfolio companies at Rock Ventures and practiced enterprise law at Troutman Pepper.
-        </p>
+      <!-- 3. UWM & Career Discussion + 4-Photo Editorial Grid -->
+      <div class="mb-16">
+        <div class="max-w-3xl space-y-5 text-[16.5px] leading-[1.8] text-stone-700 dark:text-[#C8C7C0] mb-8">
+          <p>
+            Before founding Chroneme, I served as Executive Vice President, Chief Legal &amp; Administrative Officer, and Board Secretary at <span class="entity-pill">United Wholesale Mortgage</span>—helping take the business from private hyper-growth to the nation’s largest mortgage lender and a landmark public listing on the New York Stock Exchange. Earlier in my career, I solved operational problems across technology portfolio companies at <span class="entity-pill">Rock Ventures</span> and practiced enterprise law at <span class="entity-pill">Troutman Pepper</span>.
+          </p>
+        </div>
 
-        <!-- Photo 3: 4-Photo Editorial Grid: United Wholesale Mortgage with MSU Teammates -->
-        <figure id="photo-uwm" class="my-10 pt-2">
-          <!-- Top Row: 2 Shots (Spartan Conference Table + Courtside Overlook) -->
+        <figure id="photo-uwm">
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mb-3">
-            <div class="sm:col-span-6 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="sm:col-span-6 overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="UWM1.webp" 
                 alt="Adam Wolfe, Mateen Cleaves, Mat Ishbia, and Charlie Bell at the Spartan table at United Wholesale Mortgage" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="With 2000 MSU National Championship teammates Mateen Cleaves, Mat Ishbia, and Charlie Bell at the Spartan conference table at United Wholesale Mortgage."
+                data-location="United Wholesale Mortgage"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-64 sm:h-72 object-cover object-center cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
-            <div class="sm:col-span-6 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="sm:col-span-6 overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="UWM4.webp" 
                 alt="Charlie Bell, Mateen Cleaves, Mat Ishbia, and Adam Wolfe overlooking the basketball court at UWM" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="Charlie Bell, Mateen Cleaves, Mat Ishbia, and Adam Wolfe overlooking the full-size basketball court inside the UWM campus."
+                data-location="United Wholesale Mortgage"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-64 sm:h-72 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
           </div>
 
-          <!-- Bottom Row: 2 Candid Shots -->
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-            <div class="sm:col-span-7 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="sm:col-span-7 overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="UWM2.webp" 
                 alt="Adam Wolfe, Mateen Cleaves, Mat Ishbia, and Charlie Bell sharing a laugh at UWM" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="Sharing a laugh at UWM with lifelong Spartan teammates Mateen Cleaves, Mat Ishbia, and Charlie Bell."
+                data-location="United Wholesale Mortgage"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-60 sm:h-64 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
-            <div class="sm:col-span-5 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="sm:col-span-5 overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="UWM3.webp" 
                 alt="Adam Wolfe, Mateen Cleaves, and Mat Ishbia at United Wholesale Mortgage" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="With Mateen Cleaves and Mat Ishbia during our years scaling United Wholesale Mortgage."
+                data-location="United Wholesale Mortgage"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-60 sm:h-64 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
           </div>
 
-          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
+          <figcaption class="text-xs text-stone-500 dark:text-[#8E8D87] mt-3 flex items-center justify-between">
+            <span class="font-medium text-stone-700 dark:text-[#C8C7C0]">United Wholesale Mortgage</span>
             <span>With 2000 MSU teammates Mat Ishbia, Mateen Cleaves, and Charlie Bell</span>
-            <span class="text-stone-400 dark:text-stone-500">United Wholesale Mortgage</span>
           </figcaption>
         </figure>
+      </div>
 
-        <!-- 4. MSU Discussion -->
-        <p>
-          That discipline started early. At Michigan State University, where I earned my undergraduate and law degrees, playing basketball for Tom Izzo and winning the 2000 NCAA National Championship taught me what daily championship habits actually look like when the pressure is real.
-        </p>
+      <!-- 4. MSU Discussion + 5-Photo Editorial Grid -->
+      <div>
+        <div class="max-w-3xl space-y-5 text-[16.5px] leading-[1.8] text-stone-700 dark:text-[#C8C7C0] mb-8">
+          <p>
+            That discipline started early. At <span class="entity-pill">Michigan State University</span>, where I earned my undergraduate and law degrees, playing basketball for Tom Izzo and winning the 2000 NCAA National Championship taught me what daily championship habits actually look like when the pressure is real.
+          </p>
+        </div>
 
-        <!-- Photo 4: 5-Photo Editorial Grid: 2000 MSU National Championship -->
-        <figure id="photo-msu" class="my-10 pt-2">
-          <!-- Top Row: 2 Hero Shots (Trophy Hoist + On-Court Celebration) -->
+        <figure id="photo-msu">
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mb-3">
-            <div class="sm:col-span-7 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="sm:col-span-7 overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="Champs5.JPG" 
                 alt="Coach Tom Izzo and the 2000 Michigan State Spartans hoisting the NCAA National Championship trophy" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="Hoisting the 2000 NCAA National Championship trophy with Coach Tom Izzo and the Michigan State Spartans."
+                data-location="2000 NCAA National Championship"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-64 sm:h-80 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
-            <div class="sm:col-span-5 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="sm:col-span-5 overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="Champs3.jpeg" 
                 alt="Michigan State Spartans celebrating on the court at the 2000 NCAA National Championship" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="Celebrating on the court in Indianapolis after winning the 2000 National Title."
+                data-location="Indianapolis, 2000"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-64 sm:h-80 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
           </div>
 
-          <!-- Bottom Row: 3 Locker Room Shots (Solo Trophy + Team Locker Room) -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div class="overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="Champs2.jpg" 
                 alt="Adam Wolfe holding the 2000 NCAA National Championship trophy" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="Holding the 2000 NCAA National Championship trophy after cutting down the nets."
+                data-location="Michigan State Basketball"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-52 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
-            <div class="overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="Champs%201.JPG" 
                 alt="2000 Michigan State Basketball team celebrating with the National Championship trophy in the locker room" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="In the locker room with the 2000 Michigan State Championship team."
+                data-location="Michigan State Basketball"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-52 object-cover object-center cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
-            <div class="overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+            <div class="overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
               <img 
                 src="Champs4.JPG" 
                 alt="Michigan State teammates celebrating in the locker room after winning the 2000 National Title" 
                 loading="lazy"
-                onclick="openLightbox(this.src, this.alt)"
+                data-gallery="true"
+                data-caption="Post-game locker room celebration after capturing the 2000 National Championship."
+                data-location="Michigan State Basketball"
+                onclick="openLightboxBySrc(this.src)"
                 class="w-full h-52 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
               />
             </div>
           </div>
 
-          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
+          <figcaption class="text-xs text-stone-500 dark:text-[#8E8D87] mt-3 flex items-center justify-between">
+            <span class="font-medium text-stone-700 dark:text-[#C8C7C0]">Michigan State University</span>
             <span>2000 NCAA National Champions under Coach Tom Izzo</span>
-            <span class="text-stone-400 dark:text-stone-500">Michigan State University</span>
           </figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- Writing & From Chroneme -->
-    <section id="writing" class="py-14 border-b border-stone-200/90 dark:border-stone-800">
+    <!-- Writing & Notes (With 96px Square Thumbnails like Zohaib's Writing List) -->
+    <section id="writing" class="py-16 border-b editorial-border">
       <div class="flex items-baseline justify-between mb-6">
-        <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500">Writing &amp; Notes</h2>
+        <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68]">Writing</h2>
       </div>
 
       <!-- Topic Pills -->
       <div class="flex flex-wrap gap-2 mb-8 text-xs">
-        <button onclick="filterPosts('all')" data-filter="all" class="filter-btn px-3 py-1 rounded-full bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 transition">Everything <span class="opacity-60 ml-0.5">5</span></button>
-        <button onclick="filterPosts('ai')" data-filter="ai" class="filter-btn px-3 py-1 rounded-full bg-stone-200/70 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300/70 transition">Clinical AI <span class="opacity-60 ml-0.5">2</span></button>
-        <button onclick="filterPosts('chroneme')" data-filter="chroneme" class="filter-btn px-3 py-1 rounded-full bg-stone-200/70 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300/70 transition">Building Chroneme <span class="opacity-60 ml-0.5">2</span></button>
-        <button onclick="filterPosts('leadership')" data-filter="leadership" class="filter-btn px-3 py-1 rounded-full bg-stone-200/70 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300/70 transition">Scale &amp; Governance <span class="opacity-60 ml-0.5">1</span></button>
+        <button onclick="filterPosts('all')" data-filter="all" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-900 text-[#F7F6F2] dark:bg-[#F5F4F0] dark:text-[#0B0B0A] font-medium transition">Everything <span class="opacity-60 ml-1">5</span></button>
+        <button onclick="filterPosts('ai')" data-filter="ai" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">Clinical AI <span class="opacity-60 ml-1">2</span></button>
+        <button onclick="filterPosts('chroneme')" data-filter="chroneme" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">Building Chroneme <span class="opacity-60 ml-1">2</span></button>
+        <button onclick="filterPosts('leadership')" data-filter="leadership" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">Scale &amp; Governance <span class="opacity-60 ml-1">1</span></button>
       </div>
 
-      <div id="posts-list" class="divide-y divide-stone-200/70 dark:divide-stone-800/80">
+      <ol id="posts-list" class="divide-y editorial-border">
         
-        <article data-category="ai" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(0); return false;" class="block">
-            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Oct 2026 · Clinical AI · 6 min</div>
-            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-              What 124,000 patient encounters taught us about neuro-symbolic medicine
-            </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-              Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. Here is what happens when you separate the two.
-            </p>
+        <li data-category="ai" class="py-5 essay-row">
+          <a href="#writing" onclick="openEssayModal(0); return false;" class="flex items-start gap-4 sm:gap-6 group">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
+              <img src="chroneme.JPG" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">18 Oct 2026 · Clinical AI · 6 min</div>
+              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
+                What 124,000 patient encounters taught us about neuro-symbolic medicine
+              </h3>
+              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
+                Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. Here is what happens when you separate the two.
+              </p>
+            </div>
           </a>
-        </article>
+        </li>
 
-        <article data-category="leadership" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(1); return false;" class="block">
-            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Sep 2026 · Scale &amp; Governance · 4 min</div>
-            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-              Why regulated industries don’t have an AI problem—they have an auditability problem
-            </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-              Reflections from the Midwest Technology Summit on why healthcare and financial institutions cannot deploy systems that cannot explain their own decisions.
-            </p>
+        <li data-category="leadership" class="py-5 essay-row">
+          <a href="#writing" onclick="openEssayModal(1); return false;" class="flex items-start gap-4 sm:gap-6 group">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
+              <img src="UWM1.webp" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">14 Sep 2026 · Scale &amp; Governance · 4 min</div>
+              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
+                Why regulated industries don’t have an AI problem—they have an auditability problem
+              </h3>
+              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
+                Reflections from the Midwest Technology Summit on why healthcare and financial institutions cannot deploy systems that cannot explain their own decisions.
+              </p>
+            </div>
           </a>
-        </article>
+        </li>
 
-        <article data-category="chroneme" class="py-5 essay-row">
-          <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Aug 2026 · Building Chroneme · 1 min</div>
-          <a href="https://www.zohaibakhtar.com/post/adam-wolfe-chroneme" target="_blank" rel="noopener" class="block">
-            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-              Why Zohaib and I are building Chroneme &nearr;
-            </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-              Closing my chapter at United Wholesale Mortgage to build the clinical intelligence layer medicine has been missing.
-            </p>
+        <li data-category="chroneme" class="py-5 essay-row">
+          <a href="https://www.zohaibakhtar.com/post/adam-wolfe-chroneme" target="_blank" rel="noopener" class="flex items-start gap-4 sm:gap-6 group">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
+              <img src="UWM4.webp" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">25 Aug 2026 · Building Chroneme · 1 min</div>
+              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
+                Adam Wolfe @ Chroneme &nearr;
+              </h3>
+              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
+                Closing my chapter at United Wholesale Mortgage to build the clinical intelligence layer medicine has been missing alongside Zohaib Akhtar.
+              </p>
+            </div>
           </a>
-        </article>
+        </li>
 
-        <article data-category="ai" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(2); return false;" class="block">
-            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Jul 2026 · Clinical AI · 5 min</div>
-            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-              Catching pancreatic cancer before the symptoms arrive
-            </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-              In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier.
-            </p>
+        <li data-category="ai" class="py-5 essay-row">
+          <a href="#writing" onclick="openEssayModal(2); return false;" class="flex items-start gap-4 sm:gap-6 group">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
+              <img src="family.jpeg" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">19 Jul 2026 · Clinical AI · 5 min</div>
+              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
+                Catching pancreatic cancer before the symptoms arrive
+              </h3>
+              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
+                In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier.
+              </p>
+            </div>
           </a>
-        </article>
+        </li>
 
-        <article data-category="chroneme" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(3); return false;" class="block">
-            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">May 2026 · Building Chroneme · 4 min</div>
-            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-              From Breslin Center to the boardroom: what carries over
-            </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-              On standards, preparation, and why the best teams never confuse activity with execution.
-            </p>
+        <li data-category="chroneme" class="py-5 essay-row">
+          <a href="#writing" onclick="openEssayModal(3); return false;" class="flex items-start gap-4 sm:gap-6 group">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
+              <img src="Champs5.JPG" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">10 May 2026 · Building Chroneme · 4 min</div>
+              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
+                From Breslin Center to the boardroom: what carries over
+              </h3>
+              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
+                On standards, preparation, and why the best teams never confuse activity with execution.
+              </p>
+            </div>
           </a>
-        </article>
+        </li>
 
-      </div>
+      </ol>
 
       <!-- From Chroneme Sub-list -->
-      <div class="mt-10 pt-8 border-t border-stone-200/60 dark:border-stone-800/60">
-        <h3 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-4">From Chroneme</h3>
+      <div class="mt-10 pt-8 border-t editorial-border">
+        <h3 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-4">From Chroneme</h3>
         <div class="space-y-3 text-sm max-w-xl">
           <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">Why Medicine Needs Neuro-symbolic AI &nearr;</span>
-            <span class="text-xs text-stone-400">Oct 2026</span>
+            <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">Why Medicine Needs Neuro-symbolic AI &nearr;</span>
+            <span class="text-xs text-stone-400 dark:text-[#6E6D68]">Oct 2026</span>
           </a>
           <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">We Drew This Line Once &nearr;</span>
-            <span class="text-xs text-stone-400">Jul 2026</span>
+            <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">We Drew This Line Once &nearr;</span>
+            <span class="text-xs text-stone-400 dark:text-[#6E6D68]">Jul 2026</span>
           </a>
           <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">The AI Wrapper Problem in Healthcare &nearr;</span>
-            <span class="text-xs text-stone-400">May 2026</span>
+            <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">The AI Wrapper Problem in Healthcare &nearr;</span>
+            <span class="text-xs text-stone-400 dark:text-[#6E6D68]">May 2026</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Work · 01 of 04 + Vertical Video (talking2.mp4) -->
-    <section id="work" class="py-14 border-b border-stone-200/90 dark:border-stone-800">
-      <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-8">Work</h2>
+    <!-- Photographs Section (Story-Driven Archive inspired by Zohaib's Photographs section) -->
+    <section id="photographs" class="py-16 border-b editorial-border">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68]">Photographs</h2>
+          <p class="text-sm text-stone-500 dark:text-[#8E8D87] mt-1">Moments from Chroneme, United Wholesale Mortgage, Michigan State, and home. Click any photograph for the story.</p>
+        </div>
+        <button onclick="openLightboxByIndex(0)" class="text-xs px-3 py-1.5 rounded-full border editorial-border text-stone-600 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition hidden sm:inline-block">
+          Open gallery &rarr;
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <button onclick="openLightboxBySrc('chroneme.JPG')" class="group text-left overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
+          <img src="chroneme.JPG" alt="With Zohaib Akhtar at Chroneme" loading="lazy" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" />
+          <div class="p-3">
+            <p class="text-xs font-medium text-stone-900 dark:text-[#F5F4F0] truncate">Building Chroneme</p>
+            <p class="text-[11px] text-stone-500 dark:text-[#8E8D87] truncate mt-0.5">With Zohaib Akhtar</p>
+          </div>
+        </button>
+
+        <button onclick="openLightboxBySrc('family.jpeg')" class="group text-left overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
+          <img src="family.jpeg" alt="With my wife Marissa" loading="lazy" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" />
+          <div class="p-3">
+            <p class="text-xs font-medium text-stone-900 dark:text-[#F5F4F0] truncate">With Marissa</p>
+            <p class="text-[11px] text-stone-500 dark:text-[#8E8D87] truncate mt-0.5">Birmingham, Michigan</p>
+          </div>
+        </button>
+
+        <button onclick="openLightboxBySrc('UWM1.webp')" class="group text-left overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
+          <img src="UWM1.webp" alt="Spartans at UWM" loading="lazy" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" />
+          <div class="p-3">
+            <p class="text-xs font-medium text-stone-900 dark:text-[#F5F4F0] truncate">Spartans at UWM</p>
+            <p class="text-[11px] text-stone-500 dark:text-[#8E8D87] truncate mt-0.5">Ishbia, Cleaves &amp; Bell</p>
+          </div>
+        </button>
+
+        <button onclick="openLightboxBySrc('Champs5.JPG')" class="group text-left overflow-hidden rounded-xl border editorial-border bg-stone-100 dark:bg-[#141413]">
+          <img src="Champs5.JPG" alt="2000 NCAA National Champions" loading="lazy" class="w-full h-44 object-cover object-top group-hover:scale-105 transition duration-300" />
+          <div class="p-3">
+            <p class="text-xs font-medium text-stone-900 dark:text-[#F5F4F0] truncate">2000 National Title</p>
+            <p class="text-[11px] text-stone-500 dark:text-[#8E8D87] truncate mt-0.5">Coach Tom Izzo &amp; MSU</p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- Work · 01 of 04 + Vertical Feature Video (talking2.mp4) -->
+    <section id="work" class="py-16 border-b editorial-border">
+      <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-8">Work</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
         <!-- 4 Career Pillars -->
-        <div class="md:col-span-7 space-y-8">
+        <div class="md:col-span-7 space-y-9">
           <div class="group">
-            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 01 of 04 · Co-Founder &amp; CEO</div>
-            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+            <div class="text-xs text-stone-400 dark:text-[#6E6D68] mb-1">Work · 01 of 04 · Co-Founder &amp; CEO</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-[#F5F4F0]">
               <a href="https://chroneme.com" target="_blank" rel="noopener" class="hover:underline underline-offset-4">Chroneme, Inc. — Continuous clinical intelligence</a>
             </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+            <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed">
               Building neuro-symbolic AI that combines deep pattern recognition with explicit medical logic, validated across 124,000 patient encounters and active health-system oncology collaborations.
             </p>
           </div>
 
           <div class="group">
-            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 02 of 04 · EVP, Chief Legal &amp; Administrative Officer</div>
-            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+            <div class="text-xs text-stone-400 dark:text-[#6E6D68] mb-1">Work · 02 of 04 · EVP, Chief Legal &amp; Administrative Officer</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-[#F5F4F0]">
               United Wholesale Mortgage (NYSE: UWMC) — Hyper-growth to public scale
             </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+            <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed">
               Led legal, governance, board administration, and operating subsidiaries through the company’s ascent to the #1 mortgage lender in the United States and its record-setting NYSE public listing.
             </p>
           </div>
 
           <div class="group">
-            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 03 of 04 · Co-Founder &amp; Co-Owner</div>
-            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+            <div class="text-xs text-stone-400 dark:text-[#6E6D68] mb-1">Work · 03 of 04 · Co-Founder &amp; Co-Owner</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-[#F5F4F0]">
               EASE Compliance Advisors, Teton Group &amp; Court Vision
             </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+            <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed">
               Co-founded EASE from inception as an independent regulatory compliance firm; co-own Teton Group with partner Timothy Pfund; and back disciplined operators through Court Vision.
             </p>
           </div>
 
           <div class="group">
-            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 04 of 04 · Foundation</div>
-            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+            <div class="text-xs text-stone-400 dark:text-[#6E6D68] mb-1">Work · 04 of 04 · Foundation</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-[#F5F4F0]">
               Rock Ventures, Troutman Pepper, Kellogg &amp; Michigan State
             </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+            <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed">
               Executive problem solving across Rock Ventures portfolio companies (StockX, Bedrock, JACK Entertainment), corporate practice at Troutman Pepper, MBA at Northwestern Kellogg, JD and BA at Michigan State University, and 2000 NCAA National Champion under Coach Tom Izzo.
             </p>
           </div>
@@ -456,7 +674,7 @@
 
         <!-- Secondary Vertical Video: talking2.mp4 (9:16 Portrait) -->
         <figure id="video-work" class="md:col-span-5">
-          <div class="relative overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 max-w-xs mx-auto md:max-w-none">
+          <div class="relative overflow-hidden rounded-2xl border editorial-border bg-[#121211] max-w-xs mx-auto md:max-w-none shadow-lg">
             <video 
               id="work-video-player"
               src="talking2.mp4" 
@@ -471,48 +689,49 @@
             <button 
               onclick="toggleVideoMute('work-video-player', 'work-mute-label')" 
               aria-label="Toggle audio"
-              class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-black/65 hover:bg-black/80 text-stone-100 text-[11px] backdrop-blur-sm transition flex items-center gap-1.5"
+              class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/70 hover:bg-black/90 text-[#F5F4F0] border border-white/15 text-xs backdrop-blur-md transition flex items-center gap-1.5"
             >
               <span id="work-mute-label">Unmute</span>
             </button>
           </div>
-          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between max-w-xs mx-auto md:max-w-none">
+          <figcaption class="text-xs text-stone-500 dark:text-[#8E8D87] mt-3 flex items-center justify-between max-w-xs mx-auto md:max-w-none">
+            <span class="font-medium text-stone-700 dark:text-[#C8C7C0]">In the Classroom</span>
             <span>On leadership &amp; execution</span>
-            <span class="text-stone-400 dark:text-stone-500">In the Classroom</span>
           </figcaption>
         </figure>
       </div>
     </section>
 
     <!-- Contact & Footer -->
-    <footer id="contact" class="pt-14 text-sm text-stone-600 dark:text-stone-400">
-      <div class="grid sm:grid-cols-3 gap-8 pb-12 border-b border-stone-200/80 dark:border-stone-800">
+    <footer id="contact" class="pt-14 text-sm text-stone-600 dark:text-[#A8A7A1]">
+      <div class="grid sm:grid-cols-3 gap-8 pb-12 border-b editorial-border">
         <div>
-          <p class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-3">Contact</p>
-          <a href="mailto:adam@chroneme.com" class="text-stone-900 dark:text-stone-100 hover:underline underline-offset-4 block mb-1">Get in touch &rarr;</a>
-          <p class="text-xs text-stone-500">Birmingham, Michigan</p>
+          <p class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-3">Contact</p>
+          <a href="mailto:adam@chroneme.com" class="text-stone-900 dark:text-[#F5F4F0] font-medium hover:underline underline-offset-4 block mb-1">Get in touch &rarr;</a>
+          <p class="text-xs text-stone-500 dark:text-[#8E8D87]">Birmingham, Michigan</p>
         </div>
 
         <div>
-          <p class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-3">This Site</p>
+          <p class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-3">This Site</p>
           <ul class="space-y-1.5">
-            <li><a href="#about" class="hover:text-stone-900 dark:hover:text-stone-100">About</a></li>
-            <li><a href="#writing" class="hover:text-stone-900 dark:hover:text-stone-100">Writing</a></li>
-            <li><a href="#work" class="hover:text-stone-900 dark:hover:text-stone-100">Work</a></li>
+            <li><a href="#about" class="hover:text-stone-900 dark:hover:text-white">About</a></li>
+            <li><a href="#writing" class="hover:text-stone-900 dark:hover:text-white">Writing</a></li>
+            <li><a href="#photographs" class="hover:text-stone-900 dark:hover:text-white">Photographs</a></li>
+            <li><a href="#work" class="hover:text-stone-900 dark:hover:text-white">Work</a></li>
           </ul>
         </div>
 
         <div>
-          <p class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-3">Follow &amp; Links</p>
+          <p class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-3">Follow &amp; Links</p>
           <ul class="space-y-1.5">
-            <li><a href="https://chroneme.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-stone-100">Chroneme</a></li>
-            <li><a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-stone-100">Zohaib Akhtar</a></li>
-            <li><a href="https://www.linkedin.com/in/adam-wolfe/" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-stone-100">LinkedIn</a></li>
+            <li><a href="https://chroneme.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white">Chroneme</a></li>
+            <li><a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white">Zohaib Akhtar</a></li>
+            <li><a href="https://www.linkedin.com/in/adam-wolfe/" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white">LinkedIn</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-stone-400 dark:text-stone-500">
+      <div class="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-stone-400 dark:text-[#6E6D68]">
         <div class="flex items-center gap-4">
           <span>English</span>
           <button onclick="toggleTheme()" id="theme-toggle" class="hover:text-stone-800 dark:hover:text-stone-200 underline underline-offset-4">
@@ -527,46 +746,83 @@
 
   </main>
 
-  <!-- Minimalist Photo Lightbox -->
-  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4 sm:p-8 cursor-zoom-out">
-    <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[92vw] rounded-lg object-contain shadow-2xl border border-stone-800" />
+  <!-- Story-Driven Gallery Lightbox Modal (with Prev/Next & Story Captions) -->
+  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-[#0B0B0A]/95 p-4 sm:p-8 backdrop-blur-md">
+    <div class="max-w-4xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+      <div class="w-full flex items-center justify-between text-xs text-[#A8A7A1] mb-3 px-1">
+        <span id="lightbox-location" class="uppercase tracking-widest text-[#8E8D87]"></span>
+        <div class="flex items-center gap-4">
+          <span id="lightbox-counter" class="text-[#6E6D68]"></span>
+          <button onclick="closeLightbox()" class="text-[#F5F4F0] hover:opacity-75 text-sm">Close &times;</button>
+        </div>
+      </div>
+
+      <div class="relative w-full flex items-center justify-center">
+        <button onclick="stepLightbox(-1)" aria-label="Previous photo" class="absolute left-2 sm:-left-12 px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs backdrop-blur-sm transition">&larr;</button>
+        <img id="lightbox-img" src="" alt="" class="max-h-[75vh] max-w-full rounded-xl object-contain shadow-2xl border border-white/10" />
+        <button onclick="stepLightbox(1)" aria-label="Next photo" class="absolute right-2 sm:-right-12 px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs backdrop-blur-sm transition">&rarr;</button>
+      </div>
+
+      <p id="lightbox-caption" class="mt-4 text-sm text-[#D6D5CE] text-center max-w-2xl leading-relaxed font-serif"></p>
+    </div>
   </div>
 
   <!-- Minimalist Essay Reader Modal -->
-  <div id="essay-modal" onclick="closeEssayModal(event)" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 sm:p-6">
-    <div class="bg-[#FAF9F5] dark:bg-[#161615] text-stone-800 dark:text-stone-200 max-w-2xl w-full rounded-xl p-6 sm:p-10 border border-stone-200 dark:border-stone-800 shadow-2xl max-h-[85vh] overflow-y-auto" onclick="event.stopPropagation()">
-      <div class="flex items-center justify-between text-xs text-stone-400 dark:text-stone-500 mb-4">
+  <div id="essay-modal" onclick="closeEssayModal()" class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0B0B0A]/80 p-4 sm:p-6 backdrop-blur-sm">
+    <div class="bg-[#F7F6F2] dark:bg-[#141413] text-stone-800 dark:text-[#E6E5E0] max-w-2xl w-full rounded-2xl p-6 sm:p-10 border editorial-border shadow-2xl max-h-[85vh] overflow-y-auto" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between text-xs text-stone-400 dark:text-[#8E8D87] mb-4">
         <span id="essay-modal-meta"></span>
-        <button onclick="closeEssayModal()" class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100">Close &times;</button>
+        <button onclick="closeEssayModal()" class="text-stone-500 hover:text-stone-900 dark:hover:text-white">Close &times;</button>
       </div>
-      <h3 id="essay-modal-title" class="font-serif text-2xl sm:text-3xl text-stone-900 dark:text-stone-100 mb-4"></h3>
-      <div id="essay-modal-body" class="space-y-4 text-base leading-relaxed text-stone-700 dark:text-stone-300"></div>
+      <h3 id="essay-modal-title" class="font-serif text-2xl sm:text-3xl text-stone-900 dark:text-[#F5F4F0] mb-4"></h3>
+      <div id="essay-modal-body" class="space-y-4 text-base leading-relaxed text-stone-700 dark:text-[#C8C7C0]"></div>
     </div>
   </div>
 
   <script>
     const essays = [
       {
-        meta: 'Oct 2026 · Clinical AI · 6 min',
+        meta: '18 Oct 2026 · Clinical AI · 6 min',
         title: 'What 124,000 patient encounters taught us about neuro-symbolic medicine',
         body: '<p>Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. When a pure black-box model trains on electronic health records, it often learns when a lab was ordered rather than why the patient was deteriorating.</p><p>At Chroneme, we separated pattern recognition from explicit clinical logic. Across 124,000 patient encounters, pairing deep learning with transparent symbolic reasoning allowed our system to generalize across care settings while showing clinicians every step of its diagnostic logic.</p>'
       },
       {
-        meta: 'Sep 2026 · Scale & Governance · 4 min',
+        meta: '14 Sep 2026 · Scale & Governance · 4 min',
         title: 'Why regulated industries don’t have an AI problem—they have an auditability problem',
         body: '<p>In both financial services and healthcare, high-stakes decisions carry regulatory, legal, and human consequences. Leaders in regulated industries rarely hesitate because they doubt AI capability; they hesitate because black-box predictions cannot be audited when something goes wrong.</p><p>True enterprise scale requires governance built into the architecture itself—systems where every output is traceable to explicit rules and verifiable evidence.</p>'
       },
       {
-        meta: 'Jul 2026 · Clinical AI · 5 min',
+        meta: '19 Jul 2026 · Clinical AI · 5 min',
         title: 'Catching pancreatic cancer before the symptoms arrive',
         body: '<p>In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier—slight metabolic shifts, routine lab trends, and clinical notes that no single visit flags in isolation.</p><p>By combining longitudinal pattern detection with structured oncological reasoning, our active early-detection trials aim to surface high-risk patients while intervention can still change the outcome.</p>'
       },
       {
-        meta: 'May 2026 · Building Chroneme · 4 min',
+        meta: '10 May 2026 · Building Chroneme · 4 min',
         title: 'From Breslin Center to the boardroom: what carries over',
         body: '<p>Playing for Tom Izzo at Michigan State and winning the 2000 National Championship ingrained a simple standard: championship teams never confuse activity with execution. Under pressure, you do not rise to the occasion—you default to your daily habits and preparation.</p><p>Whether taking United Wholesale Mortgage public on the NYSE or building Chroneme from the ground up, the same discipline applies: clarity of role, relentless preparation, and total accountability to the team.</p>'
       }
     ];
+
+    function toggleHeroAudio() {
+      const wide = document.getElementById('hero-video-wide');
+      const tall = document.getElementById('hero-video-tall');
+      const label = document.getElementById('hero-mute-label');
+      const dot = document.getElementById('hero-mute-dot');
+      const isDesktop = window.matchMedia('(min-width: 640px)').matches;
+      const activeVideo = isDesktop ? wide : tall;
+      const inactiveVideo = isDesktop ? tall : wide;
+
+      if (!activeVideo) return;
+      if (inactiveVideo) inactiveVideo.muted = true;
+      activeVideo.muted = !activeVideo.muted;
+
+      if (label) label.textContent = activeVideo.muted ? 'Unmute audio' : 'Mute audio';
+      if (dot) {
+        dot.className = activeVideo.muted
+          ? 'w-1.5 h-1.5 rounded-full bg-stone-400'
+          : 'w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse';
+      }
+    }
 
     function toggleVideoMute(videoId, labelId) {
       const video = document.getElementById(videoId);
@@ -597,14 +853,14 @@
     syncThemeButtons();
 
     function filterPosts(category) {
-      const articles = document.querySelectorAll('#posts-list article');
+      const articles = document.querySelectorAll('#posts-list li');
       const buttons = document.querySelectorAll('.filter-btn');
       
       buttons.forEach(btn => {
         if (btn.dataset.filter === category) {
-          btn.className = 'filter-btn px-3 py-1 rounded-full bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 transition';
+          btn.className = 'filter-btn px-3.5 py-1.5 rounded-full bg-stone-900 text-[#F7F6F2] dark:bg-[#F5F4F0] dark:text-[#0B0B0A] font-medium transition';
         } else {
-          btn.className = 'filter-btn px-3 py-1 rounded-full bg-stone-200/70 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300/70 transition';
+          btn.className = 'filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition';
         }
       });
 
@@ -617,13 +873,54 @@
       });
     }
 
-    function openLightbox(src, alt) {
+    // Story-driven Gallery Lightbox
+    let galleryItems = [];
+    let currentGalleryIndex = 0;
+
+    function buildGallery() {
+      const imgs = document.querySelectorAll('img[data-gallery="true"]');
+      galleryItems = Array.from(imgs).map(img => ({
+        src: img.getAttribute('src'),
+        alt: img.getAttribute('alt') || '',
+        caption: img.getAttribute('data-caption') || img.getAttribute('alt') || '',
+        location: img.getAttribute('data-location') || ''
+      }));
+    }
+
+    function renderLightbox() {
+      if (!galleryItems.length) buildGallery();
+      const item = galleryItems[currentGalleryIndex];
+      if (!item) return;
+      document.getElementById('lightbox-img').src = item.src;
+      document.getElementById('lightbox-img').alt = item.alt;
+      document.getElementById('lightbox-caption').textContent = item.caption;
+      document.getElementById('lightbox-location').textContent = item.location;
+      document.getElementById('lightbox-counter').textContent = (currentGalleryIndex + 1) + ' / ' + galleryItems.length;
+    }
+
+    function openLightboxByIndex(index) {
+      buildGallery();
+      currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
+      renderLightbox();
       const lb = document.getElementById('lightbox');
-      const img = document.getElementById('lightbox-img');
-      img.src = src;
-      img.alt = alt || '';
       lb.classList.remove('hidden');
       lb.classList.add('flex');
+    }
+
+    function openLightboxBySrc(src) {
+      buildGallery();
+      const idx = galleryItems.findIndex(item => item.src === src || src.endsWith(item.src));
+      currentGalleryIndex = idx >= 0 ? idx : 0;
+      renderLightbox();
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    }
+
+    function stepLightbox(delta) {
+      if (!galleryItems.length) buildGallery();
+      currentGalleryIndex = (currentGalleryIndex + delta + galleryItems.length) % galleryItems.length;
+      renderLightbox();
     }
 
     function closeLightbox() {
@@ -653,6 +950,10 @@
       if (e.key === 'Escape') {
         closeLightbox();
         closeEssayModal();
+      } else if (e.key === 'ArrowRight' && !document.getElementById('lightbox').classList.contains('hidden')) {
+        stepLightbox(1);
+      } else if (e.key === 'ArrowLeft' && !document.getElementById('lightbox').classList.contains('hidden')) {
+        stepLightbox(-1);
       }
     });
   </script>
