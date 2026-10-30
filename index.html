@@ -85,7 +85,7 @@
 
   <main class="max-w-4xl mx-auto px-6 pb-24">
 
-    <!-- Identity Header -->
+    <!-- Identity Header + Active Widescreen Hero Video (talking1.mp4) -->
     <section class="pt-12 pb-14 border-b border-stone-200/90 dark:border-stone-800">
       <div class="flex flex-col gap-1">
         <h1 class="text-3xl sm:text-4xl font-medium tracking-tight text-stone-900 dark:text-stone-100">
@@ -95,6 +95,34 @@
           Building the neuro-symbolic AI for medicine.
         </p>
       </div>
+
+      <!-- Hero Video: talking1.mp4 (16:9 Landscape) -->
+      <figure id="video-hero" class="mt-8">
+        <div class="relative overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+          <video 
+            id="hero-video-player"
+            src="talking1.mp4" 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            preload="auto"
+            class="w-full aspect-video object-cover"
+            onerror="document.getElementById('video-hero').style.display='none'"
+          ></video>
+          <button 
+            onclick="toggleVideoMute('hero-video-player', 'hero-mute-label')" 
+            aria-label="Toggle audio"
+            class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-black/65 hover:bg-black/80 text-stone-100 text-[11px] backdrop-blur-sm transition flex items-center gap-1.5"
+          >
+            <span id="hero-mute-label">Unmute</span>
+          </button>
+        </div>
+        <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
+          <span>Speaking on clinical intelligence, architecture, and high-stakes governance</span>
+          <span class="text-stone-400 dark:text-stone-500">Executive Seminar</span>
+        </figcaption>
+      </figure>
     </section>
 
     <!-- About (First-Person Narrative + Inline Photos) -->
@@ -378,50 +406,81 @@
       </div>
     </section>
 
-    <!-- Work · 01 of 04 -->
+    <!-- Work · 01 of 04 + Vertical Video (talking2.mp4) -->
     <section id="work" class="py-14 border-b border-stone-200/90 dark:border-stone-800">
       <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-8">Work</h2>
 
-      <div class="space-y-8 max-w-3xl">
-        <div class="group">
-          <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 01 of 04 · Co-Founder &amp; CEO</div>
-          <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
-            <a href="https://chroneme.com" target="_blank" rel="noopener" class="hover:underline underline-offset-4">Chroneme, Inc. — Continuous clinical intelligence</a>
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
-            Building neuro-symbolic AI that combines deep pattern recognition with explicit medical logic, validated across 124,000 patient encounters and active health-system oncology collaborations.
-          </p>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+        <!-- 4 Career Pillars -->
+        <div class="md:col-span-7 space-y-8">
+          <div class="group">
+            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 01 of 04 · Co-Founder &amp; CEO</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+              <a href="https://chroneme.com" target="_blank" rel="noopener" class="hover:underline underline-offset-4">Chroneme, Inc. — Continuous clinical intelligence</a>
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+              Building neuro-symbolic AI that combines deep pattern recognition with explicit medical logic, validated across 124,000 patient encounters and active health-system oncology collaborations.
+            </p>
+          </div>
+
+          <div class="group">
+            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 02 of 04 · EVP, Chief Legal &amp; Administrative Officer</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+              United Wholesale Mortgage (NYSE: UWMC) — Hyper-growth to public scale
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+              Led legal, governance, board administration, and operating subsidiaries through the company’s ascent to the #1 mortgage lender in the United States and its record-setting NYSE public listing.
+            </p>
+          </div>
+
+          <div class="group">
+            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 03 of 04 · Co-Founder &amp; Co-Owner</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+              EASE Compliance Advisors, Teton Group &amp; Court Vision
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+              Co-founded EASE from inception as an independent regulatory compliance firm; co-own Teton Group with partner Timothy Pfund; and back disciplined operators through Court Vision.
+            </p>
+          </div>
+
+          <div class="group">
+            <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 04 of 04 · Foundation</div>
+            <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
+              Rock Ventures, Troutman Pepper, Kellogg &amp; Michigan State
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
+              Executive problem solving across Rock Ventures portfolio companies (StockX, Bedrock, JACK Entertainment), corporate practice at Troutman Pepper, MBA at Northwestern Kellogg, JD and BA at Michigan State University, and 2000 NCAA National Champion under Coach Tom Izzo.
+            </p>
+          </div>
         </div>
 
-        <div class="group">
-          <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 02 of 04 · EVP, Chief Legal &amp; Administrative Officer</div>
-          <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
-            United Wholesale Mortgage (NYSE: UWMC) — Hyper-growth to public scale
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
-            Led legal, governance, board administration, and operating subsidiaries through the company’s ascent to the #1 mortgage lender in the United States and its record-setting NYSE public listing.
-          </p>
-        </div>
-
-        <div class="group">
-          <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 03 of 04 · Co-Founder &amp; Co-Owner</div>
-          <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
-            EASE Compliance Advisors, Teton Group &amp; Court Vision
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
-            Co-founded EASE from inception as an independent regulatory compliance firm; co-own Teton Group with partner Timothy Pfund; and back disciplined operators through Court Vision.
-          </p>
-        </div>
-
-        <div class="group">
-          <div class="text-xs text-stone-400 dark:text-stone-500 mb-1">Work · 04 of 04 · Foundation</div>
-          <h3 class="font-serif text-xl text-stone-900 dark:text-stone-100">
-            Rock Ventures, Troutman Pepper, Kellogg &amp; Michigan State
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed">
-            Executive problem solving across Rock Ventures portfolio companies (StockX, Bedrock, JACK Entertainment), corporate practice at Troutman Pepper, MBA at Northwestern Kellogg, JD and BA at Michigan State University, and 2000 NCAA National Champion under Coach Tom Izzo.
-          </p>
-        </div>
+        <!-- Secondary Vertical Video: talking2.mp4 (9:16 Portrait) -->
+        <figure id="video-work" class="md:col-span-5">
+          <div class="relative overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 max-w-xs mx-auto md:max-w-none">
+            <video 
+              id="work-video-player"
+              src="talking2.mp4" 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              preload="metadata"
+              class="w-full aspect-[9/16] object-cover"
+              onerror="document.getElementById('video-work').style.display='none'"
+            ></video>
+            <button 
+              onclick="toggleVideoMute('work-video-player', 'work-mute-label')" 
+              aria-label="Toggle audio"
+              class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-black/65 hover:bg-black/80 text-stone-100 text-[11px] backdrop-blur-sm transition flex items-center gap-1.5"
+            >
+              <span id="work-mute-label">Unmute</span>
+            </button>
+          </div>
+          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between max-w-xs mx-auto md:max-w-none">
+            <span>On leadership &amp; execution</span>
+            <span class="text-stone-400 dark:text-stone-500">In the Classroom</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -508,6 +567,16 @@
         body: '<p>Playing for Tom Izzo at Michigan State and winning the 2000 National Championship ingrained a simple standard: championship teams never confuse activity with execution. Under pressure, you do not rise to the occasion—you default to your daily habits and preparation.</p><p>Whether taking United Wholesale Mortgage public on the NYSE or building Chroneme from the ground up, the same discipline applies: clarity of role, relentless preparation, and total accountability to the team.</p>'
       }
     ];
+
+    function toggleVideoMute(videoId, labelId) {
+      const video = document.getElementById(videoId);
+      const label = document.getElementById(labelId);
+      if (!video) return;
+      video.muted = !video.muted;
+      if (label) {
+        label.textContent = video.muted ? 'Unmute' : 'Mute';
+      }
+    }
 
     function syncThemeButtons() {
       const isDark = document.documentElement.classList.contains('dark');
