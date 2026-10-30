@@ -34,6 +34,17 @@
       }
     }
   </script>
+  <script>
+    // Apply saved theme preference before page render to avoid flash
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
   <style>
     body {
       background-color: #FAF9F5;
@@ -64,6 +75,9 @@
       <a href="#contact" class="hover:text-stone-900 dark:hover:text-stone-100 transition">Contact</a>
     </nav>
     <div class="flex items-center gap-4 text-xs text-stone-500 dark:text-stone-400">
+      <button onclick="toggleTheme()" id="header-theme-toggle" aria-label="Toggle theme" class="hover:text-stone-900 dark:hover:text-stone-100 transition">
+        Light mode
+      </button>
       <span>EN</span>
       <a href="#contact" class="sm:hidden hover:text-stone-900 dark:hover:text-stone-100">Contact</a>
     </div>
@@ -88,20 +102,15 @@
       <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-6">About</h2>
       
       <div class="space-y-6 text-[17px] leading-[1.8] text-stone-800 dark:text-stone-200 font-normal max-w-3xl">
+        <!-- 1. Chroneme Discussion -->
         <p>
-          I have spent my career building the architecture, governance, and teams that let complex organizations operate at massive scale without losing sight of what matters.
-        </p>
-        <p>
-          That discipline started early. At Michigan State University, playing basketball for Tom Izzo and winning the 2000 NCAA National Championship taught me what daily championship habits actually look like when the pressure is real. After earning my undergraduate and law degrees at Michigan State, I practiced enterprise law at Troutman Pepper, solved operational problems across technology portfolio companies at Rock Ventures, and served as Executive Vice President, Chief Legal &amp; Administrative Officer, and Board Secretary at United Wholesale Mortgage—helping take the business from private hyper-growth to the nation’s largest mortgage lender and a landmark public listing on the New York Stock Exchange.
-        </p>
-        <p>
-          Every one of those chapters came down to the same truth: high-stakes systems fail when complexity outpaces clarity. <a href="https://chroneme.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Chroneme</a> applies that lesson where the stakes are highest. I am building it as Co-Founder and CEO alongside <a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Zohaib Akhtar</a>, whom I met while earning my MBA at Northwestern’s Kellogg School of Management.
+          I have spent my career building the architecture, governance, and teams that let complex organizations operate at massive scale without losing sight of what matters. Every chapter of my career has come down to the same truth: high-stakes systems fail when complexity outpaces clarity. <a href="https://chroneme.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Chroneme</a> applies that lesson where the stakes are highest. I am building it as Co-Founder and CEO alongside <a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Zohaib Akhtar</a>, whom I met while earning my MBA at Northwestern’s Kellogg School of Management.
         </p>
         <p>
           Chroneme is an advanced clinical intelligence system powered by neuro-symbolic AI. Unlike black-box models that guess from patterns alone, it pairs deep learning with explicit clinical logic—so it notices early signals in a patient the way a great physician does, and shows its reasoning at every step. Across 124,000 patient encounters and active oncology early-detection trials, we are proving that clinical AI can be both extraordinarily capable and completely transparent.
         </p>
 
-        <!-- Photo 1: With Zohaib (chroneme.JPG) -->
+        <!-- Photo 1: Chroneme (chroneme.JPG) -->
         <figure id="photo-chroneme" class="my-10 pt-2">
           <img 
             src="chroneme.JPG" 
@@ -116,6 +125,7 @@
           </figcaption>
         </figure>
 
+        <!-- 2. Marissa & Life Outside Work Discussion -->
         <p>
           Alongside Chroneme, I co-founded EASE Compliance Advisors, co-own Teton Group, and advise founders through Court Vision. Outside work, I live in Birmingham, Michigan with my wife of 23 years, Marissa, and our three children. When I’m not working, I’m usually training for the next HYROX race, logging early-morning miles, or out on the golf course.
         </p>
@@ -125,6 +135,7 @@
           <img 
             src="family.jpeg" 
             alt="Adam Wolfe with his wife Marissa" 
+            loading="lazy"
             onclick="openLightbox(this.src, this.alt)"
             class="w-full rounded-lg object-cover max-h-[500px] border border-stone-200/80 dark:border-stone-800 cursor-zoom-in"
             onerror="document.getElementById('photo-family').style.display='none'"
@@ -135,7 +146,73 @@
           </figcaption>
         </figure>
 
-        <!-- Photo 3: 5-Photo Editorial Grid: 2000 MSU National Championship -->
+        <!-- 3. UWM & Career Discussion -->
+        <p>
+          Before founding Chroneme, I served as Executive Vice President, Chief Legal &amp; Administrative Officer, and Board Secretary at United Wholesale Mortgage—helping take the business from private hyper-growth to the nation’s largest mortgage lender and a landmark public listing on the New York Stock Exchange. Earlier in my career, I solved operational problems across technology portfolio companies at Rock Ventures and practiced enterprise law at Troutman Pepper.
+        </p>
+
+        <!-- Photo 3: 4-Photo Editorial Grid: United Wholesale Mortgage with MSU Teammates -->
+        <figure id="photo-uwm" class="my-10 pt-2">
+          <!-- Top Row: 2 Shots (Spartan Conference Table + Courtside Overlook) -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mb-3">
+            <div class="sm:col-span-6 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="UWM1.webp" 
+                alt="Adam Wolfe, Mateen Cleaves, Mat Ishbia, and Charlie Bell at the Spartan table at United Wholesale Mortgage" 
+                loading="lazy"
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-64 sm:h-72 object-cover object-center cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+            <div class="sm:col-span-6 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="UWM4.webp" 
+                alt="Charlie Bell, Mateen Cleaves, Mat Ishbia, and Adam Wolfe overlooking the basketball court at UWM" 
+                loading="lazy"
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-64 sm:h-72 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+          </div>
+
+          <!-- Bottom Row: 2 Candid Shots -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+            <div class="sm:col-span-7 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="UWM2.webp" 
+                alt="Adam Wolfe, Mateen Cleaves, Mat Ishbia, and Charlie Bell sharing a laugh at UWM" 
+                loading="lazy"
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-60 sm:h-64 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+            <div class="sm:col-span-5 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="UWM3.webp" 
+                alt="Adam Wolfe, Mateen Cleaves, and Mat Ishbia at United Wholesale Mortgage" 
+                loading="lazy"
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-60 sm:h-64 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+          </div>
+
+          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
+            <span>With 2000 MSU teammates Mat Ishbia, Mateen Cleaves, and Charlie Bell</span>
+            <span class="text-stone-400 dark:text-stone-500">United Wholesale Mortgage</span>
+          </figcaption>
+        </figure>
+
+        <!-- 4. MSU Discussion -->
+        <p>
+          That discipline started early. At Michigan State University, where I earned my undergraduate and law degrees, playing basketball for Tom Izzo and winning the 2000 NCAA National Championship taught me what daily championship habits actually look like when the pressure is real.
+        </p>
+
+        <!-- Photo 4: 5-Photo Editorial Grid: 2000 MSU National Championship -->
         <figure id="photo-msu" class="my-10 pt-2">
           <!-- Top Row: 2 Hero Shots (Trophy Hoist + On-Court Celebration) -->
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mb-3">
@@ -143,6 +220,7 @@
               <img 
                 src="Champs5.JPG" 
                 alt="Coach Tom Izzo and the 2000 Michigan State Spartans hoisting the NCAA National Championship trophy" 
+                loading="lazy"
                 onclick="openLightbox(this.src, this.alt)"
                 class="w-full h-64 sm:h-80 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
@@ -152,6 +230,7 @@
               <img 
                 src="Champs3.jpeg" 
                 alt="Michigan State Spartans celebrating on the court at the 2000 NCAA National Championship" 
+                loading="lazy"
                 onclick="openLightbox(this.src, this.alt)"
                 class="w-full h-64 sm:h-80 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
@@ -165,6 +244,7 @@
               <img 
                 src="Champs2.jpg" 
                 alt="Adam Wolfe holding the 2000 NCAA National Championship trophy" 
+                loading="lazy"
                 onclick="openLightbox(this.src, this.alt)"
                 class="w-full h-52 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
@@ -172,8 +252,9 @@
             </div>
             <div class="overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
               <img 
-                src="Champs 1.JPG" 
+                src="Champs%201.JPG" 
                 alt="2000 Michigan State Basketball team celebrating with the National Championship trophy in the locker room" 
+                loading="lazy"
                 onclick="openLightbox(this.src, this.alt)"
                 class="w-full h-52 object-cover object-center cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
@@ -183,6 +264,7 @@
               <img 
                 src="Champs4.JPG" 
                 alt="Michigan State teammates celebrating in the locker room after winning the 2000 National Title" 
+                loading="lazy"
                 onclick="openLightbox(this.src, this.alt)"
                 class="w-full h-52 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
                 onerror="this.parentElement.style.display='none'"
@@ -215,23 +297,27 @@
       <div id="posts-list" class="divide-y divide-stone-200/70 dark:divide-stone-800/80">
         
         <article data-category="ai" class="py-5 essay-row">
-          <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Oct 2026 · Clinical AI · 6 min</div>
-          <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-            What 124,000 patient encounters taught us about neuro-symbolic medicine
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-            Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. Here is what happens when you separate the two.
-          </p>
+          <a href="#writing" onclick="openEssayModal(0); return false;" class="block">
+            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Oct 2026 · Clinical AI · 6 min</div>
+            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
+              What 124,000 patient encounters taught us about neuro-symbolic medicine
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
+              Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. Here is what happens when you separate the two.
+            </p>
+          </a>
         </article>
 
         <article data-category="leadership" class="py-5 essay-row">
-          <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Sep 2026 · Scale &amp; Governance · 4 min</div>
-          <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-            Why regulated industries don’t have an AI problem—they have an auditability problem
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-            Reflections from the Midwest Technology Summit on why healthcare and financial institutions cannot deploy systems that cannot explain their own decisions.
-          </p>
+          <a href="#writing" onclick="openEssayModal(1); return false;" class="block">
+            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Sep 2026 · Scale &amp; Governance · 4 min</div>
+            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
+              Why regulated industries don’t have an AI problem—they have an auditability problem
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
+              Reflections from the Midwest Technology Summit on why healthcare and financial institutions cannot deploy systems that cannot explain their own decisions.
+            </p>
+          </a>
         </article>
 
         <article data-category="chroneme" class="py-5 essay-row">
@@ -247,23 +333,27 @@
         </article>
 
         <article data-category="ai" class="py-5 essay-row">
-          <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Jul 2026 · Clinical AI · 5 min</div>
-          <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-            Catching pancreatic cancer before the symptoms arrive
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-            In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier.
-          </p>
+          <a href="#writing" onclick="openEssayModal(2); return false;" class="block">
+            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">Jul 2026 · Clinical AI · 5 min</div>
+            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
+              Catching pancreatic cancer before the symptoms arrive
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
+              In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier.
+            </p>
+          </a>
         </article>
 
         <article data-category="chroneme" class="py-5 essay-row">
-          <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">May 2026 · Building Chroneme · 4 min</div>
-          <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
-            From Breslin Center to the boardroom: what carries over
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
-            On standards, preparation, and why the best teams never confuse activity with execution.
-          </p>
+          <a href="#writing" onclick="openEssayModal(3); return false;" class="block">
+            <div class="text-xs text-stone-500 dark:text-stone-400 mb-1">May 2026 · Building Chroneme · 4 min</div>
+            <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-stone-100 font-normal">
+              From Breslin Center to the boardroom: what carries over
+            </h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1.5 leading-relaxed max-w-3xl">
+              On standards, preparation, and why the best teams never confuse activity with execution.
+            </p>
+          </a>
         </article>
 
       </div>
@@ -272,16 +362,16 @@
       <div class="mt-10 pt-8 border-t border-stone-200/60 dark:border-stone-800/60">
         <h3 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-4">From Chroneme</h3>
         <div class="space-y-3 text-sm max-w-xl">
-          <a href="https://chroneme.com" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">Why Medicine Needs Neuro-symbolic AI</span>
+          <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
+            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">Why Medicine Needs Neuro-symbolic AI &nearr;</span>
             <span class="text-xs text-stone-400">Oct 2026</span>
           </a>
-          <a href="https://chroneme.com" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">We Drew This Line Once</span>
+          <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
+            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">We Drew This Line Once &nearr;</span>
             <span class="text-xs text-stone-400">Jul 2026</span>
           </a>
-          <a href="https://chroneme.com" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">The AI Wrapper Problem in Healthcare</span>
+          <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
+            <span class="text-stone-800 dark:text-stone-200 group-hover:underline underline-offset-4">The AI Wrapper Problem in Healthcare &nearr;</span>
             <span class="text-xs text-stone-400">May 2026</span>
           </a>
         </div>
@@ -358,7 +448,7 @@
           <ul class="space-y-1.5">
             <li><a href="https://chroneme.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-stone-100">Chroneme</a></li>
             <li><a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-stone-100">Zohaib Akhtar</a></li>
-            <li><a href="https://www.linkedin.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-stone-100">LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/adam-wolfe/" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-stone-100">LinkedIn</a></li>
           </ul>
         </div>
       </div>
@@ -383,13 +473,59 @@
     <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[92vw] rounded-lg object-contain shadow-2xl border border-stone-800" />
   </div>
 
+  <!-- Minimalist Essay Reader Modal -->
+  <div id="essay-modal" onclick="closeEssayModal(event)" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 sm:p-6">
+    <div class="bg-[#FAF9F5] dark:bg-[#161615] text-stone-800 dark:text-stone-200 max-w-2xl w-full rounded-xl p-6 sm:p-10 border border-stone-200 dark:border-stone-800 shadow-2xl max-h-[85vh] overflow-y-auto" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between text-xs text-stone-400 dark:text-stone-500 mb-4">
+        <span id="essay-modal-meta"></span>
+        <button onclick="closeEssayModal()" class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100">Close &times;</button>
+      </div>
+      <h3 id="essay-modal-title" class="font-serif text-2xl sm:text-3xl text-stone-900 dark:text-stone-100 mb-4"></h3>
+      <div id="essay-modal-body" class="space-y-4 text-base leading-relaxed text-stone-700 dark:text-stone-300"></div>
+    </div>
+  </div>
+
   <script>
+    const essays = [
+      {
+        meta: 'Oct 2026 · Clinical AI · 6 min',
+        title: 'What 124,000 patient encounters taught us about neuro-symbolic medicine',
+        body: '<p>Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. When a pure black-box model trains on electronic health records, it often learns when a lab was ordered rather than why the patient was deteriorating.</p><p>At Chroneme, we separated pattern recognition from explicit clinical logic. Across 124,000 patient encounters, pairing deep learning with transparent symbolic reasoning allowed our system to generalize across care settings while showing clinicians every step of its diagnostic logic.</p>'
+      },
+      {
+        meta: 'Sep 2026 · Scale & Governance · 4 min',
+        title: 'Why regulated industries don’t have an AI problem—they have an auditability problem',
+        body: '<p>In both financial services and healthcare, high-stakes decisions carry regulatory, legal, and human consequences. Leaders in regulated industries rarely hesitate because they doubt AI capability; they hesitate because black-box predictions cannot be audited when something goes wrong.</p><p>True enterprise scale requires governance built into the architecture itself—systems where every output is traceable to explicit rules and verifiable evidence.</p>'
+      },
+      {
+        meta: 'Jul 2026 · Clinical AI · 5 min',
+        title: 'Catching pancreatic cancer before the symptoms arrive',
+        body: '<p>In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier—slight metabolic shifts, routine lab trends, and clinical notes that no single visit flags in isolation.</p><p>By combining longitudinal pattern detection with structured oncological reasoning, our active early-detection trials aim to surface high-risk patients while intervention can still change the outcome.</p>'
+      },
+      {
+        meta: 'May 2026 · Building Chroneme · 4 min',
+        title: 'From Breslin Center to the boardroom: what carries over',
+        body: '<p>Playing for Tom Izzo at Michigan State and winning the 2000 National Championship ingrained a simple standard: championship teams never confuse activity with execution. Under pressure, you do not rise to the occasion—you default to your daily habits and preparation.</p><p>Whether taking United Wholesale Mortgage public on the NYSE or building Chroneme from the ground up, the same discipline applies: clarity of role, relentless preparation, and total accountability to the team.</p>'
+      }
+    ];
+
+    function syncThemeButtons() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const label = isDark ? 'Light mode' : 'Dark mode';
+      const footerBtn = document.getElementById('theme-toggle');
+      const headerBtn = document.getElementById('header-theme-toggle');
+      if (footerBtn) footerBtn.textContent = label;
+      if (headerBtn) headerBtn.textContent = label;
+    }
+
     function toggleTheme() {
       const html = document.documentElement;
-      const btn = document.getElementById('theme-toggle');
       html.classList.toggle('dark');
-      btn.textContent = html.classList.contains('dark') ? 'Light mode' : 'Dark mode';
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncThemeButtons();
     }
+
+    syncThemeButtons();
 
     function filterPosts(category) {
       const articles = document.querySelectorAll('#posts-list article');
@@ -427,8 +563,28 @@
       lb.classList.remove('flex');
     }
 
+    function openEssayModal(index) {
+      const item = essays[index];
+      if (!item) return;
+      document.getElementById('essay-modal-meta').textContent = item.meta;
+      document.getElementById('essay-modal-title').textContent = item.title;
+      document.getElementById('essay-modal-body').innerHTML = item.body;
+      const modal = document.getElementById('essay-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeEssayModal() {
+      const modal = document.getElementById('essay-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeEssayModal();
+      }
     });
   </script>
 </body>
