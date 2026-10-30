@@ -83,7 +83,7 @@
       </div>
     </section>
 
-    <!-- About (First-Person Narrative + 2 Inline Photos) -->
+    <!-- About (First-Person Narrative + Inline Photos) -->
     <section id="about" class="py-14 border-b border-stone-200/90 dark:border-stone-800">
       <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-6">About</h2>
       
@@ -94,6 +94,68 @@
         <p>
           That discipline started early. At Michigan State University, playing basketball for Tom Izzo and winning the 2000 NCAA National Championship taught me what daily championship habits actually look like when the pressure is real. After earning my undergraduate and law degrees at Michigan State, I practiced enterprise law at Troutman Pepper, solved operational problems across technology portfolio companies at Rock Ventures, and served as Executive Vice President, Chief Legal &amp; Administrative Officer, and Board Secretary at United Wholesale Mortgage—helping take the business from private hyper-growth to the nation’s largest mortgage lender and a landmark public listing on the New York Stock Exchange.
         </p>
+
+        <!-- 5-Photo Editorial Grid: 2000 MSU National Championship -->
+        <figure id="photo-msu" class="my-10 pt-2">
+          <!-- Top Row: 2 Hero Shots (Trophy Hoist + On-Court Celebration) -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mb-3">
+            <div class="sm:col-span-7 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="Champs5.JPG" 
+                alt="Coach Tom Izzo and the 2000 Michigan State Spartans hoisting the NCAA National Championship trophy" 
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-64 sm:h-80 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+            <div class="sm:col-span-5 overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="Champs3.jpeg" 
+                alt="Michigan State Spartans celebrating on the court at the 2000 NCAA National Championship" 
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-64 sm:h-80 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+          </div>
+
+          <!-- Bottom Row: 3 Locker Room Shots (Solo Trophy + Team Locker Room) -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="Champs2.jpg" 
+                alt="Adam Wolfe holding the 2000 NCAA National Championship trophy" 
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-52 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+            <div class="overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="Champs 1.JPG" 
+                alt="2000 Michigan State Basketball team celebrating with the National Championship trophy in the locker room" 
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-52 object-cover object-center cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+            <div class="overflow-hidden rounded-lg border border-stone-200/80 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+              <img 
+                src="Champs4.JPG" 
+                alt="Michigan State teammates celebrating in the locker room after winning the 2000 National Title" 
+                onclick="openLightbox(this.src, this.alt)"
+                class="w-full h-52 object-cover object-top cursor-zoom-in hover:scale-[1.02] transition duration-300"
+                onerror="this.parentElement.style.display='none'"
+              />
+            </div>
+          </div>
+
+          <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
+            <span>2000 NCAA National Champions under Coach Tom Izzo</span>
+            <span class="text-stone-400 dark:text-stone-500">Michigan State University</span>
+          </figcaption>
+        </figure>
+
         <p>
           Every one of those chapters came down to the same truth: high-stakes systems fail when complexity outpaces clarity. <a href="https://chroneme.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Chroneme</a> applies that lesson where the stakes are highest. I am building it as Co-Founder and CEO alongside <a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900 dark:hover:decoration-stone-100">Zohaib Akhtar</a>, whom I met while earning my MBA at Northwestern’s Kellogg School of Management.
         </p>
@@ -106,7 +168,8 @@
           <img 
             src="chroneme.JPG" 
             alt="Adam Wolfe and Zohaib Akhtar at Chroneme" 
-            class="w-full rounded-lg object-cover max-h-[500px] border border-stone-200/80 dark:border-stone-800"
+            onclick="openLightbox(this.src, this.alt)"
+            class="w-full rounded-lg object-cover max-h-[500px] border border-stone-200/80 dark:border-stone-800 cursor-zoom-in"
             onerror="document.getElementById('photo-chroneme').style.display='none'"
           />
           <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
@@ -124,7 +187,8 @@
           <img 
             src="family.jpeg" 
             alt="Adam Wolfe with his wife Marissa" 
-            class="w-full rounded-lg object-cover max-h-[500px] border border-stone-200/80 dark:border-stone-800"
+            onclick="openLightbox(this.src, this.alt)"
+            class="w-full rounded-lg object-cover max-h-[500px] border border-stone-200/80 dark:border-stone-800 cursor-zoom-in"
             onerror="document.getElementById('photo-family').style.display='none'"
           />
           <figcaption class="text-xs text-stone-500 dark:text-stone-400 mt-3 flex items-center justify-between">
@@ -315,6 +379,11 @@
 
   </main>
 
+  <!-- Minimalist Photo Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4 sm:p-8 cursor-zoom-out">
+    <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[92vw] rounded-lg object-contain shadow-2xl border border-stone-800" />
+  </div>
+
   <script>
     function toggleTheme() {
       const html = document.documentElement;
@@ -343,6 +412,25 @@
         }
       });
     }
+
+    function openLightbox(src, alt) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 </body>
 </html>
