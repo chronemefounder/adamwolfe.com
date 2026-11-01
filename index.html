@@ -96,7 +96,6 @@
       text-decoration: underline;
       text-underline-offset: 4px;
     }
-    /* Staggered word reveal inspired by zohaibakhtar.com */
     @keyframes wordReveal {
       from {
         opacity: 0;
@@ -122,7 +121,7 @@
     Skip to content
   </a>
 
-  <!-- Top Navigation (Zohaib Akhtar style sticky/minimal bar) -->
+  <!-- Top Navigation -->
   <header class="max-w-5xl mx-auto px-6 pt-8 pb-6 flex items-center justify-between text-sm">
     <a href="#" aria-label="Adam Wolfe, home" class="tracking-tight text-stone-900 dark:text-[#F5F4F0] text-base">
       <span class="font-normal text-stone-600 dark:text-[#A8A7A1]">Adam</span><b class="font-semibold">Wolfe</b>
@@ -149,7 +148,7 @@
 
   <main id="main" class="max-w-5xl mx-auto px-6 pb-24">
 
-    <!-- Hero Section: Responsive Dual-Video + Cinematic Overlay (Zohaib Akhtar Style) -->
+    <!-- Hero Section: Responsive Dual-Video + Cinematic Overlay -->
     <section class="pt-4 pb-16 border-b editorial-border">
       <div class="relative overflow-hidden rounded-2xl border editorial-border bg-[#121211] shadow-2xl">
         
@@ -222,7 +221,7 @@
     <section id="about" class="py-16 border-b editorial-border">
       <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-6">About</h2>
 
-      <!-- Lead Statement (Zohaib style large editorial opener) -->
+      <!-- Lead Statement -->
       <div class="max-w-3xl mb-14">
         <p class="font-serif text-2xl sm:text-3xl leading-[1.45] text-stone-900 dark:text-[#F5F4F0]">
           I have spent my career building the architecture, governance, and teams that let complex organizations operate at massive scale without losing sight of what matters.
@@ -454,130 +453,66 @@
       </div>
     </section>
 
-    <!-- Writing & Notes (With 96px Square Thumbnails like Zohaib's Writing List) -->
+    <!-- Writing (All 21 Essays & LinkedIn Posts Built Directly Into This File) -->
     <section id="writing" class="py-16 border-b editorial-border">
       <div class="flex items-baseline justify-between mb-6">
         <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68]">Writing</h2>
+        <a href="https://www.linkedin.com/in/wolfevision" target="_blank" rel="noopener" class="text-xs text-stone-500 dark:text-[#8E8D87] hover:text-stone-950 dark:hover:text-white transition">
+          Follow on LinkedIn &nearr;
+        </a>
       </div>
 
       <!-- Topic Pills -->
       <div class="flex flex-wrap gap-2 mb-8 text-xs">
-        <button onclick="filterPosts('all')" data-filter="all" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-900 text-[#F7F6F2] dark:bg-[#F5F4F0] dark:text-[#0B0B0A] font-medium transition">Everything <span class="opacity-60 ml-1">5</span></button>
-        <button onclick="filterPosts('ai')" data-filter="ai" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">Clinical AI <span class="opacity-60 ml-1">2</span></button>
-        <button onclick="filterPosts('chroneme')" data-filter="chroneme" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">Building Chroneme <span class="opacity-60 ml-1">2</span></button>
-        <button onclick="filterPosts('leadership')" data-filter="leadership" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">Scale &amp; Governance <span class="opacity-60 ml-1">1</span></button>
+        <button onclick="filterPosts('all')" data-filter="all" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-900 text-[#F7F6F2] dark:bg-[#F5F4F0] dark:text-[#0B0B0A] font-medium transition">
+          Everything <span id="count-all" class="opacity-60 ml-1">21</span>
+        </button>
+        <button onclick="filterPosts('ai')" data-filter="ai" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">
+          Clinical AI <span id="count-ai" class="opacity-60 ml-1">7</span>
+        </button>
+        <button onclick="filterPosts('chroneme')" data-filter="chroneme" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">
+          Building Chroneme <span id="count-chroneme" class="opacity-60 ml-1">6</span>
+        </button>
+        <button onclick="filterPosts('leadership')" data-filter="leadership" class="filter-btn px-3.5 py-1.5 rounded-full bg-stone-200/70 dark:bg-[#181816] text-stone-700 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white transition">
+          Scale &amp; Governance <span id="count-leadership" class="opacity-60 ml-1">8</span>
+        </button>
       </div>
 
-      <ol id="posts-list" class="divide-y editorial-border">
-        
-        <li data-category="ai" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(0); return false;" class="flex items-start gap-4 sm:gap-6 group">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
-              <img src="chroneme.JPG" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">18 Oct 2026 · Clinical AI · 6 min</div>
-              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
-                What 124,000 patient encounters taught us about neuro-symbolic medicine
-              </h3>
-              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
-                Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. Here is what happens when you separate the two.
-              </p>
-            </div>
-          </a>
-        </li>
+      <!-- Dynamic Posts List -->
+      <ol id="posts-list" class="divide-y editorial-border"></ol>
 
-        <li data-category="leadership" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(1); return false;" class="flex items-start gap-4 sm:gap-6 group">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
-              <img src="UWM1.webp" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">14 Sep 2026 · Scale &amp; Governance · 4 min</div>
-              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
-                Why regulated industries don’t have an AI problem—they have an auditability problem
-              </h3>
-              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
-                Reflections from the Midwest Technology Summit on why healthcare and financial institutions cannot deploy systems that cannot explain their own decisions.
-              </p>
-            </div>
-          </a>
-        </li>
-
-        <li data-category="chroneme" class="py-5 essay-row">
-          <a href="https://www.zohaibakhtar.com/post/adam-wolfe-chroneme" target="_blank" rel="noopener" class="flex items-start gap-4 sm:gap-6 group">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
-              <img src="UWM4.webp" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">25 Aug 2026 · Building Chroneme · 1 min</div>
-              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
-                Adam Wolfe @ Chroneme &nearr;
-              </h3>
-              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
-                Closing my chapter at United Wholesale Mortgage to build the clinical intelligence layer medicine has been missing alongside Zohaib Akhtar.
-              </p>
-            </div>
-          </a>
-        </li>
-
-        <li data-category="ai" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(2); return false;" class="flex items-start gap-4 sm:gap-6 group">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
-              <img src="family.jpeg" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">19 Jul 2026 · Clinical AI · 5 min</div>
-              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
-                Catching pancreatic cancer before the symptoms arrive
-              </h3>
-              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
-                In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier.
-              </p>
-            </div>
-          </a>
-        </li>
-
-        <li data-category="chroneme" class="py-5 essay-row">
-          <a href="#writing" onclick="openEssayModal(3); return false;" class="flex items-start gap-4 sm:gap-6 group">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
-              <img src="Champs5.JPG" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">10 May 2026 · Building Chroneme · 4 min</div>
-              <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
-                From Breslin Center to the boardroom: what carries over
-              </h3>
-              <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
-                On standards, preparation, and why the best teams never confuse activity with execution.
-              </p>
-            </div>
-          </a>
-        </li>
-
-      </ol>
+      <!-- Show All / Show Less Toggle -->
+      <div id="posts-more-wrapper" class="mt-6 pt-2">
+        <button 
+          id="posts-more-btn" 
+          onclick="toggleShowAllPosts()" 
+          class="text-xs font-medium text-stone-600 dark:text-[#A8A7A1] hover:text-stone-950 dark:hover:text-white underline underline-offset-4 transition"
+        >
+          Show all 21 posts &darr;
+        </button>
+      </div>
 
       <!-- From Chroneme Sub-list -->
       <div class="mt-10 pt-8 border-t editorial-border">
         <h3 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-4">From Chroneme</h3>
         <div class="space-y-3 text-sm max-w-xl">
-          <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
+          <a href="https://chroneme.com/platform" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
             <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">Why Medicine Needs Neuro-symbolic AI &nearr;</span>
             <span class="text-xs text-stone-400 dark:text-[#6E6D68]">Oct 2026</span>
           </a>
-          <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">We Drew This Line Once &nearr;</span>
-            <span class="text-xs text-stone-400 dark:text-[#6E6D68]">Jul 2026</span>
+          <a href="https://chroneme.com/evidence" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
+            <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">The Evidence: Validated Against the Hardest Data in Medicine &nearr;</span>
+            <span class="text-xs text-stone-400 dark:text-[#6E6D68]">Apr 2026</span>
           </a>
-          <a href="https://chroneme.com/#research" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
-            <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">The AI Wrapper Problem in Healthcare &nearr;</span>
-            <span class="text-xs text-stone-400 dark:text-[#6E6D68]">May 2026</span>
+          <a href="https://www.zohaibakhtar.com/post/adam-wolfe-chroneme" target="_blank" rel="noopener" class="flex items-baseline justify-between group">
+            <span class="text-stone-800 dark:text-[#E6E5E0] group-hover:underline underline-offset-4">Adam Wolfe @ Chroneme &nearr;</span>
+            <span class="text-xs text-stone-400 dark:text-[#6E6D68]">Aug 2026</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Photographs Section (Story-Driven Archive inspired by Zohaib's Photographs section) -->
+    <!-- Photographs Section -->
     <section id="photographs" class="py-16 border-b editorial-border">
       <div class="flex items-center justify-between mb-6">
         <div>
@@ -629,7 +564,6 @@
       <h2 class="text-xs uppercase tracking-widest text-stone-400 dark:text-[#6E6D68] mb-8">Work</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-        <!-- 4 Career Pillars -->
         <div class="md:col-span-7 space-y-9">
           <div class="group">
             <div class="text-xs text-stone-400 dark:text-[#6E6D68] mb-1">Work · 01 of 04 · Co-Founder &amp; CEO</div>
@@ -726,7 +660,7 @@
           <ul class="space-y-1.5">
             <li><a href="https://chroneme.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white">Chroneme</a></li>
             <li><a href="https://www.zohaibakhtar.com" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white">Zohaib Akhtar</a></li>
-            <li><a href="https://www.linkedin.com/in/adam-wolfe/" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white">LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/wolfevision" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white">LinkedIn</a></li>
           </ul>
         </div>
       </div>
@@ -746,7 +680,7 @@
 
   </main>
 
-  <!-- Story-Driven Gallery Lightbox Modal (with Prev/Next & Story Captions) -->
+  <!-- Story-Driven Gallery Lightbox Modal -->
   <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-[#0B0B0A]/95 p-4 sm:p-8 backdrop-blur-md">
     <div class="max-w-4xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
       <div class="w-full flex items-center justify-between text-xs text-[#A8A7A1] mb-3 px-1">
@@ -774,34 +708,302 @@
         <span id="essay-modal-meta"></span>
         <button onclick="closeEssayModal()" class="text-stone-500 hover:text-stone-900 dark:hover:text-white">Close &times;</button>
       </div>
-      <h3 id="essay-modal-title" class="font-serif text-2xl sm:text-3xl text-stone-900 dark:text-[#F5F4F0] mb-4"></h3>
+      <h3 id="essay-modal-title" class="font-serif text-2xl sm:text-3xl text-stone-900 dark:text-[#F5F4F0] mb-5"></h3>
+      <img id="essay-modal-image" src="" alt="" class="hidden w-full max-h-96 object-cover rounded-xl border editorial-border mb-6" onerror="this.classList.add('hidden')" />
       <div id="essay-modal-body" class="space-y-4 text-base leading-relaxed text-stone-700 dark:text-[#C8C7C0]"></div>
+      <div id="essay-modal-footer" class="mt-8 pt-5 border-t editorial-border flex items-center justify-between text-xs">
+        <a id="essay-modal-link" href="#" target="_blank" rel="noopener" class="text-stone-900 dark:text-[#F5F4F0] font-medium hover:underline underline-offset-4">
+          View original post &amp; discussion on LinkedIn &nearr;
+        </a>
+      </div>
     </div>
   </div>
 
   <script>
-    const essays = [
+    const INITIAL_VISIBLE_POSTS = 8;
+    let activeCategory = 'all';
+    let showAllPosts = false;
+
+    // All 5 site essays + 16 LinkedIn posts built directly into index.html
+    let essays = [
       {
+        id: '7518054531704868865',
+        category: 'leadership',
+        meta: '19 Oct 2026 · Scale & Governance · 2 min',
+        title: 'Six weeks in a body cast: when life forces you to rewrite the playbook',
+        excerpt: 'One ESPN commenter called it “one of the most horrific college basketball injuries of all time.” Yet those six weeks trapped inside a body cast positively changed the trajectory of my entire life.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQHlYlYwGI1PjQ/feedshare-shrink_1280/B56aFV.wY3IIAM-/0/1792443877194?e=1795046400&v=beta&t=OAozITdmvqPMkCXPSAHv7oeMv3rDw231ZX8rfLpTwPw',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_msu-spartans-spartannation-activity-7518054531704868865-z9e3',
+        body: '<p>We all experience life-altering moments. Few have theirs viewed live by millions of people. I’ve never seen a replay of the injury. Only this single photo.</p><p>One ESPN commenter called it “one of the most horrific college basketball injuries of all time.” It cost me my NBA dreams and effectively ended my basketball career.</p><p>Yet, those six weeks trapped inside a body cast positively changed the trajectory of my entire life.</p><p>Marrying my wife of 23 years, becoming a lawyer, and even founding my current health tech venture, I can directly trace back to the dreams and goals hatched in that hospital bed.</p><p>This isn’t just a positive spin. It is the reality of one door closing and being forced to make decisions about what matters in your life. Whether it is an injury, a sudden health crisis, or a personal trial, life eventually forces everyone to face a moment where the old version of you isn’t coming back.</p>'
+      },
+      {
+        id: 'essay-124k',
+        category: 'ai',
         meta: '18 Oct 2026 · Clinical AI · 6 min',
         title: 'What 124,000 patient encounters taught us about neuro-symbolic medicine',
+        excerpt: 'Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. Here is what happens when you separate the two.',
+        image: 'chroneme.JPG',
+        linkedinUrl: '',
         body: '<p>Most clinical AI models stall before they reach a second hospital because they memorize hospital workflows instead of reasoning through physiology. When a pure black-box model trains on electronic health records, it often learns when a lab was ordered rather than why the patient was deteriorating.</p><p>At Chroneme, we separated pattern recognition from explicit clinical logic. Across 124,000 patient encounters, pairing deep learning with transparent symbolic reasoning allowed our system to generalize across care settings while showing clinicians every step of its diagnostic logic.</p>'
       },
       {
+        id: '7516449122057629696',
+        category: 'leadership',
+        meta: '15 Oct 2026 · Scale & Governance · 1 min',
+        title: 'Remembering “The Wizard,” Dr. Lonnie Rosen: investing in the whole person',
+        excerpt: 'During my playing days at Michigan State, when I was dealing with a major hamstring injury, Dr. Rosen proved that true mentors invest in the whole person during their toughest moments.',
+        image: 'https://media.licdn.com/dms/image/v2/D5605AQE6vAvQwkOnpQ/videocover-high/B56aE_KnW9G4BU-/0/1792061111261?e=1794106800&v=beta&t=BeQox28Q55-L40gnatLb3Wtg1qtFUvnRU3XYcIE1PAQ',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_known-to-many-as-the-wizard-dr-lonnie-activity-7516449122057629696-HjPs',
+        body: '<p>Known to many as "The Wizard," Dr. Lonnie Rosen quietly went about his work on our East Lansing campus, shaping the mental toughness and character of student-athletes and coaches across multiple sports. During my playing days on the basketball team at Michigan State, when I was dealing with a major hamstring injury, Dr. Rosen was instrumental in helping me through it, proving that true mentors invest in the whole person during their toughest moments.</p><p>It was great to see him recognized in this clip from the ESPN Saban documentary. His influence reached far beyond MSU, often without people realizing the true magnitude of his impact.</p>'
+      },
+      {
+        id: '7507799262831792129',
+        category: 'ai',
+        meta: '21 Sep 2026 · Clinical AI · 2 min',
+        title: 'Cutting through the AI hype: governance, enterprise strategy, and practical guardrails',
+        excerpt: 'Taking the stage at the Colony Club for the Pellera Midwest Technology Summit in Detroit to discuss why autonomous systems require real governance and practical guardrails.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQH-_eiPWh-2Ew/feedshare-image-high-res/B56aDEPpFDIUAU-/0/1789998830879?e=1795046400&v=beta&t=DdhdACz-wRKg-e9-ANMyUftO0AmGakBc-ryB_dLFvtw',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_pelleratechsummit-sharktank-aigovernance-activity-7507799262831792129-PgLx',
+        body: '<p>Not every day your warm-up gig is opening for Shark Tank’s Daymond John.</p><p>Had a blast taking the stage at the Colony Club for the Pellera Midwest Technology Summit to discuss the latest in AI. Between recent headlines on rogue AI agents breaking containment and the push to deploy autonomous systems, we cut right through the hype to focus on what matters: governance, enterprise strategy, and practical guardrails.</p>'
+      },
+      {
+        id: '7506100965079470080',
+        category: 'leadership',
+        meta: '16 Sep 2026 · Scale & Governance · 2 min',
+        title: 'Three foundational lessons on culture from 30 years with Spartan Basketball',
+        excerpt: 'Organizations aren’t families—they’re environments built around performance. Status should never dictate significance, standards must be universal, and shared values outperform transactional incentives.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQHyhMkbbUZBFg/feedshare-shrink_1280/B56aCsHDT8KcAM-/0/1789593925289?e=1795046400&v=beta&t=AQkYnug5a3OougrAEPRPMKK59KO_NA4fBhsPAzAs1Qs',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_leadership-companyculture-spartanpride-activity-7506100965079470080-JiEm',
+        body: '<p>30 years ago, I visited East Lansing for my first football game as a recruit. Coach Izzo had just taken over for Jud Heathcote, and Tom Crean hosted me for the weekend. On the drive home, I clearly remember telling my parents: "I’m going to be a Spartan." My mind was made up on day one.</p><p>Why? Culture. It didn’t matter if you were a student manager, an athletic trainer, or the star player (like Mateen Cleaves)—your presence mattered, your role carried weight, and you were treated with the exact same level of respect and accountability.</p><p>In business, organizations aren’t families; they’re environments built around performance. Three foundational lessons translate directly to leadership:<br>1. Status should never dictate significance.<br>2. Standards must be universal.<br>3. Shared values outperform transactional incentives.</p>'
+      },
+      {
+        id: '7505676589322387456',
+        category: 'chroneme',
+        meta: '15 Sep 2026 · Building Chroneme · 1 min',
+        title: 'The letter every Chroneme team member reads on day one',
+        excerpt: 'People still die from problems their own data saw coming hours earlier. We bring the intelligence that alerts in time and shows how to act.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQFDoYFpuUdOQg/feedshare-shrink_1280/B56aCmFFc4JcAM-/0/1789492746624?e=1795046400&v=beta&t=7bJ9rg5hstC9w-IjmTfPKMfJ5U2xqWS9oHHZriYyVNk',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_below-is-the-letter-every-chroneme-team-member-activity-7505676589322387456-1Yxq',
+        body: '<p>Below is the letter every Chroneme team member reads their first day on the team.</p><p>People still die from problems their own data saw coming hours earlier. We bring the intelligence that alerts in time and shows how to act. This letter is the promise we make to the people building it.</p>'
+      },
+      {
+        id: '7505445685987741696',
+        category: 'leadership',
+        meta: '15 Sep 2026 · Scale & Governance · 2 min',
+        title: '1:32 at HYROX: redlined on the wall balls and two minutes to close',
+        excerpt: 'Starting Chroneme wasn’t my only goal in 2026. My wife and I committed to doing a HYROX with a non-negotiable goal of 1:30—and crossed the line at 1:32.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQGm9txQexB0lw/feedshare-image-high-res/B56aCizE7HIsAU-/0/1789437693866?e=1795046400&v=beta&t=cGJa3Fcjl4fcDLFaMThRrGvmYi03BdUvGzfgBZP8NMU',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_starting-chroneme-wasnt-my-only-goal-in-activity-7505445685987741696-EEUp',
+        body: '<p>Starting Chroneme wasn’t my only goal in 2026. My wife and I committed to doing a Hyrox: eight 1-kilometer runs, each followed by a brutal functional station.</p><p>We set a hard, non-negotiable goal of 1:30 and crossed the line at 1:32. By the time we hit the 100 wall balls at the end, I was on the verge of blacking out. I’m proud we finished, but coming up two minutes short doesn’t sit well—already back in the gym putting in the work to close the gap.</p>'
+      },
+      {
+        id: 'essay-auditability',
+        category: 'leadership',
         meta: '14 Sep 2026 · Scale & Governance · 4 min',
         title: 'Why regulated industries don’t have an AI problem—they have an auditability problem',
+        excerpt: 'Reflections on why healthcare and financial institutions cannot deploy systems that cannot explain their own decisions.',
+        image: 'UWM1.webp',
+        linkedinUrl: '',
         body: '<p>In both financial services and healthcare, high-stakes decisions carry regulatory, legal, and human consequences. Leaders in regulated industries rarely hesitate because they doubt AI capability; they hesitate because black-box predictions cannot be audited when something goes wrong.</p><p>True enterprise scale requires governance built into the architecture itself—systems where every output is traceable to explicit rules and verifiable evidence.</p>'
       },
       {
+        id: '7503502848513585152',
+        category: 'leadership',
+        meta: '09 Sep 2026 · Scale & Governance · 2 min',
+        title: 'Take the case off and let it get scratched: how we insulate ourselves from risk',
+        excerpt: 'Spending $1,200 on aerospace-grade titanium and immediately covering it with a $50 silicone brick is the perfect metaphor for how most people handle risk.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQHNqLyayWxxDg/feedshare-shrink_1280/B56aCHME7oHYAM-/0/1788974485673?e=1795046400&v=beta&t=eCpqXxUb4_7qWarYpxNN3_qW_4YXqM-6FqATfsbc5XQ',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_every-september-today-to-be-exact-millions-activity-7503502848513585152-mbhQ',
+        body: '<p>Every September, millions of people watch teams of world-class materials scientists brag about aerospace-grade titanium and ceramic shields, spend $1,200 on an engineering marvel, and immediately cover it with a $50 silicone cover.</p><p>The case isn’t really there to protect the hardware. It exists to protect your anxiety. In work and in life, we constantly insulate ourselves from tiny, superficial risks. In exchange, we accept permanent, low-grade friction. Take the case off and let it get scratched.</p>'
+      },
+      {
+        id: 'essay-zohaib-link',
+        category: 'chroneme',
+        meta: '25 Aug 2026 · Building Chroneme · 1 min',
+        title: 'Adam Wolfe @ Chroneme ↗',
+        excerpt: 'Closing my chapter at United Wholesale Mortgage to build the clinical intelligence layer medicine has been missing alongside Zohaib Akhtar.',
+        image: 'UWM4.webp',
+        externalUrl: 'https://www.zohaibakhtar.com/post/adam-wolfe-chroneme',
+        body: ''
+      },
+      {
+        id: '7494347263000096769',
+        category: 'chroneme',
+        meta: '15 Aug 2026 · Building Chroneme · 1 min',
+        title: 'Turning 45: walking away from a public company executive role to build Chroneme',
+        excerpt: 'Two weeks ago I walked away from a public company executive role to build a health tech company with my co-founder, Zohaib. It has already been one of the most rewarding experiences of my life.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQFbjf1yfKGi0Q/feedshare-shrink_1280/B56aAFFH3wKsAM-/0/1786791624858?e=1795046400&v=beta&t=uvS2hbmd91Y2ilCmbKPMrTqitTNEQbUAdiUAomTg5Tw',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_today-is-my-45th-birthday-i-woke-up-at-5-activity-7494347263000096769-Q4UU',
+        body: '<p>Today is my 45th birthday. I woke up at 5 AM feeling incredibly thankful for all the blessings in my life—mostly for the amazing people in it.</p><p>Two weeks ago I walked away from a public company executive role to build a health tech company with my co-founder, Zohaib. It has already been one of the most personally and professionally rewarding experiences of my life.</p>'
+      },
+      {
+        id: '7492553451730763777',
+        category: 'leadership',
+        meta: '10 Aug 2026 · Scale & Governance · 1 min',
+        title: 'Standing next to Muhammad Ali: “What will you do today to be great?”',
+        excerpt: 'Almost 25 years ago to the day, I stood next to the greatest. Proof that the greatest aren’t born that way—they decide to be, then work toward it every single day.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQH7q6xZC7x85g/feedshare-shrink_1280/B56Z_rlqVEGUAM-/0/1786363946626?e=1795046400&v=beta&t=WIoyGVdqvZR4oW2UiepQG4xZMgxmsYGSF6zPh163-sw',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_almost-25-years-ago-to-the-day-i-stood-next-activity-7492553451730763777-ZoX8',
+        body: '<p>Almost 25 years ago to the day, I stood next to the greatest. I was a kid playing for Michigan State. I just remember feeling like I was standing next to proof that the greatest aren’t born that way. They decide to be, then work toward it every single day.</p><p>When I was fortunate enough to have my own office, the first thing I did was hang an Ali painting on the wall. It asks me the same question every morning: What will you do today to be great?</p>'
+      },
+      {
+        id: 'essay-pancreatic',
+        category: 'ai',
         meta: '19 Jul 2026 · Clinical AI · 5 min',
         title: 'Catching pancreatic cancer before the symptoms arrive',
+        excerpt: 'In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier.',
+        image: 'family.jpeg',
+        linkedinUrl: '',
         body: '<p>In oncology, the difference between a treatable stage and a late diagnosis is often hidden in subtle, longitudinal signals months earlier—slight metabolic shifts, routine lab trends, and clinical notes that no single visit flags in isolation.</p><p>By combining longitudinal pattern detection with structured oncological reasoning, our active early-detection trials aim to surface high-risk patients while intervention can still change the outcome.</p>'
       },
       {
+        id: '7466824501331402752',
+        category: 'ai',
+        meta: '31 May 2026 · Clinical AI · 1 min',
+        title: 'Sounding right vs. being right: why language models are not decision models',
+        excerpt: 'A decision model has a different objective: minimizing the cost of being wrong. It carries calibrated uncertainty, validates against outcomes, and knows when it doesn’t know.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQEeSj5sYgbpjA/feedshare-image-high-res/B56Z599UUWIEAU-/0/1780229686876?e=1795046400&v=beta&t=GHNuI50rWJ4ako3Gdi1Dy1k7O6xPaxx9-aLavMFYXEs',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_the-biggest-mistake-in-ai-today-is-confusing-activity-7466824501331402752-Da61',
+        body: '<p>The biggest mistake in AI today is confusing a system that SOUNDS right with a system that IS right.</p><p>Claude, ChatGPT, and Gemini are extraordinary language models. But they are not decision models. A decision model has a different objective: minimizing the cost of being wrong. It carries calibrated uncertainty. It can be validated against outcomes. It knows when it doesn’t know.</p><p>In medicine and law, that distinction matters. The gap between sounding right and being right is where people get hurt.</p>'
+      },
+      {
+        id: '7465743288256528385',
+        category: 'chroneme',
+        meta: '28 May 2026 · Building Chroneme · 1 min',
+        title: 'A sensor without interpretation is just noise with a battery',
+        excerpt: 'Everyone is racing to put a sensor on your wrist or finger. At Chroneme, we filed the patent for the AI layer that connects, cleans, and interprets it all—tested on the hardest data in medicine.',
+        image: 'https://media.licdn.com/dms/image/sync/v2/D4D27AQGzIvuPmmzyGw/articleshare-shrink_1280_800/B4DaDuCR0DHwAY-/0/1790699972013?e=1794106800&v=beta&t=pPHpzuRLy737_i0fvm4B8MX_kSJ8Zvy0FwzrWAAK02Y',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_chroneme-activity-7465743288256528385-qkHI',
+        body: '<p>Everyone is racing to put a sensor on your body. Google, Apple, ŌURA, WHOOP, Garmin, Withings are all fighting for the wrist and the finger. But a sensor without interpretation is just noise with a battery.</p><p>While they fought for market share, at Chroneme we quietly filed the patent for the AI layer that connects, cleans, and interprets it all—and tested it on the hardest data in medicine.</p>'
+      },
+      {
+        id: '7462837202780184576',
+        category: 'ai',
+        meta: '20 May 2026 · Clinical AI · 1 min',
+        title: 'Why AI won’t replace lawyers in 18 months—but lawyers who build with AI will',
+        excerpt: 'To say all white-collar professional tasks will be automated in 18 months misunderstands who writes the regulations. Lawyers who don’t use AI will be replaced by those who do.',
+        image: 'https://media.licdn.com/dms/image/sync/v2/D4D27AQGMhzgDZnnwlw/articleshare-shrink_1280_800/B4DaFVOyW5JcAY-/0/1792431303063?e=1794106800&v=beta&t=XruwBIqKhtBQ4jT-0CF-IGTWklmnsPR12uXNjjWL8C4',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_microsoft-ai-chief-gives-it-18-monthsfor-activity-7462837202780184576-xI5L',
+        body: '<p>Agreed that lawyers and law firms need to start adapting their practices immediately. But to say that all professional tasks are going to be replaced in the next 18 months is just plain wrong.</p><p>Here is the real truth: lawyers who don’t use AI will be replaced with those that do.</p>'
+      },
+      {
+        id: 'essay-breslin',
+        category: 'chroneme',
         meta: '10 May 2026 · Building Chroneme · 4 min',
         title: 'From Breslin Center to the boardroom: what carries over',
+        excerpt: 'On standards, preparation, and why the best teams never confuse activity with execution.',
+        image: 'Champs5.JPG',
+        linkedinUrl: '',
         body: '<p>Playing for Tom Izzo at Michigan State and winning the 2000 National Championship ingrained a simple standard: championship teams never confuse activity with execution. Under pressure, you do not rise to the occasion—you default to your daily habits and preparation.</p><p>Whether taking United Wholesale Mortgage public on the NYSE or building Chroneme from the ground up, the same discipline applies: clarity of role, relentless preparation, and total accountability to the team.</p>'
+      },
+      {
+        id: '7455647635438444546',
+        category: 'chroneme',
+        meta: '30 Apr 2026 · Building Chroneme · 1 min',
+        title: 'Why we published our methods and clinical evidence instead of hiding behind a black box',
+        excerpt: 'When you test most AI models against the hardest data in medicine, they don’t hold up—so the results stay private. At Chroneme, we chose to show our work.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQFocyUUrClbTA/feedshare-image-high-res/B56Z3fIBKsIUAU-/0/1777564914635?e=1795046400&v=beta&t=NzpYu0LIUp-PFOkzBFIJA49fOPAWzydbJ7PWVoMvRRs',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_we-could-have-kept-our-methods-and-results-activity-7455647635438444546-rMNv',
+        body: '<p>We could have kept our methods and results hidden. Most AI companies do. When you actually test their models against the hardest data in medicine, they don’t hold up—so the results stay private.</p><p>A few weeks ago Zohaib Akhtar and I shared why we built Chroneme. Today, we want to show you what we built and do what most AI companies won’t. Don’t trust us. Go see for yourself.</p>'
+      },
+      {
+        id: '7448324708636450816',
+        category: 'chroneme',
+        meta: '10 Apr 2026 · Building Chroneme · 2 min',
+        title: 'For Luke: why Zohaib Akhtar and I built Chroneme',
+        excerpt: 'Luke was our son. He would have been eight this year. Together with Zohaib Akhtar, we built Chroneme so your family story doesn’t have to become mine.',
+        image: 'https://media.licdn.com/dms/image/v2/D5622AQFzNdNsWE_Rkg/feedshare-image-high-res/B56Z13D2qmIQAU-/0/1775818992833?e=1795046400&v=beta&t=WK50-11BgMHIynCSyC87ywAu6VOJQW3KswFePlziTJs',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_luke-was-our-son-he-would-have-been-eight-activity-7448324708636450816-z7lb',
+        body: '<p>Luke was our son. He would have been eight this year.</p><p>The late March light peeked through the window as my wife slept for the first time in days. A nurse slowly walked in the room and placed a small package in my hand: a miniature knit cap no larger than a plum, with a card that read, “Teeny Tears. A person’s still a person, no matter how small.”</p><p>We left the hospital that afternoon with an empty baby carrier. I’ve since learned that people grieve differently. Some bury it. Others, like me, need to do something.</p><p>Then I met Zohaib Akhtar, who also refuses to accept that this is how healthcare has to be. Together, we’ve built Chroneme so your family story doesn’t have to become mine.</p>'
+      },
+      {
+        id: '7440333677412360192',
+        category: 'ai',
+        meta: '19 Mar 2026 · Clinical AI · 2 min',
+        title: 'Why ChatGPT Health missed medical emergencies: the structural flaw of black-box models',
+        excerpt: 'A Ferrari and a bicycle can both get you to the same destination. But if you don’t understand the route, more power just takes you off course faster.',
+        image: 'https://media.licdn.com/dms/image/sync/v2/D4E27AQFO7pCUTHeL-w/articleshare-shrink_1280_800/B4EZyaQ8hYJ0AQ-/0/1772114659742?e=1794106800&v=beta&t=Pf9XaHAxrnnmEsled8aXmKVLZakL3A3Bv-1-KfSgRnQ',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_unbelievably-dangerous-experts-sound-alarm-activity-7440333677412360192-DqUN',
+        body: '<p>OpenAI, here’s your fundamental problem. You’re applying the wrong model. A Ferrari and a bicycle can both get you to the same destination. But if you don’t understand the route, more power just takes you off course faster.</p><p>ChatGPT Health missed medical emergencies—sometimes advising patients to stay home. That’s not just a miss. It’s a consequence of deploying a system where you can’t see how or why a decision was made. The next phase of AI won’t be about more power; it will be about understanding the reasoning and the temporal chain behind the output.</p>'
+      },
+      {
+        id: '7427695419318554626',
+        category: 'ai',
+        meta: '12 Feb 2026 · Clinical AI · 2 min',
+        title: 'From $200,000 enterprise software to four minutes with Anthropic',
+        excerpt: 'Three weeks ago an AI vendor pitched us a $200,000 legal redaction tool. Two weeks later, a specialist on my team built what we needed in four minutes.',
+        image: 'UWM2.webp',
+        linkedinUrl: 'https://www.linkedin.com/posts/wolfevision_controversial-post-warning-these-are-my-activity-7427695419318554626-Hfis',
+        body: '<p>Three weeks ago I sat in a meeting where an AI company showed us a redaction and document search tool built for a legal team. The price was $200,000 a year.</p><p>Two weeks later, a talented business specialist on my team sat down with Anthropic’s legal tools and built what we needed in four minutes. Lawyers are no longer just users of software—they can build solutions themselves.</p>'
       }
     ];
+
+    function renderPosts() {
+      const container = document.getElementById('posts-list');
+      if (!container) return;
+
+      const counts = {
+        all: essays.length,
+        ai: essays.filter(e => e.category === 'ai').length,
+        chroneme: essays.filter(e => e.category === 'chroneme').length,
+        leadership: essays.filter(e => e.category === 'leadership').length
+      };
+      ['all', 'ai', 'chroneme', 'leadership'].forEach(key => {
+        const el = document.getElementById('count-' + key);
+        if (el) el.textContent = counts[key];
+      });
+
+      const filtered = essays
+        .map((item, idx) => ({ ...item, originalIndex: idx }))
+        .filter(item => activeCategory === 'all' || item.category === activeCategory);
+
+      const visible = showAllPosts ? filtered : filtered.slice(0, INITIAL_VISIBLE_POSTS);
+
+      container.innerHTML = visible.map(item => {
+        const clickAttrs = item.externalUrl
+          ? `href="${item.externalUrl}" target="_blank" rel="noopener"`
+          : `href="#writing" onclick="openEssayModal(${item.originalIndex}); return false;"`;
+
+        return `
+          <li data-category="${item.category}" class="py-5 essay-row">
+            <a ${clickAttrs} class="flex items-start gap-4 sm:gap-6 group">
+              ${item.image ? `
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 border editorial-border bg-stone-200 dark:bg-[#161615]">
+                  <img src="${item.image}" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'" />
+                </div>
+              ` : ''}
+              <div class="flex-1 min-w-0">
+                <div class="text-xs text-stone-500 dark:text-[#8E8D87] mb-1">${item.meta}</div>
+                <h3 class="essay-title font-serif text-lg sm:text-xl text-stone-900 dark:text-[#F5F4F0] font-normal">
+                  ${item.title}
+                </h3>
+                <p class="text-sm text-stone-600 dark:text-[#A8A7A1] mt-1.5 leading-relaxed line-clamp-2">
+                  ${item.excerpt}
+                </p>
+              </div>
+            </a>
+          </li>
+        `;
+      }).join('');
+
+      const moreWrapper = document.getElementById('posts-more-wrapper');
+      const moreBtn = document.getElementById('posts-more-btn');
+      if (moreWrapper && moreBtn) {
+        if (filtered.length <= INITIAL_VISIBLE_POSTS) {
+          moreWrapper.classList.add('hidden');
+        } else {
+          moreWrapper.classList.remove('hidden');
+          moreBtn.innerHTML = showAllPosts
+            ? 'Show fewer posts &uarr;'
+            : `Show all ${filtered.length} posts &darr;`;
+        }
+      }
+    }
+
+    function toggleShowAllPosts() {
+      showAllPosts = !showAllPosts;
+      renderPosts();
+    }
 
     function toggleHeroAudio() {
       const wide = document.getElementById('hero-video-wide');
@@ -850,10 +1052,9 @@
       syncThemeButtons();
     }
 
-    syncThemeButtons();
-
     function filterPosts(category) {
-      const articles = document.querySelectorAll('#posts-list li');
+      activeCategory = category;
+      showAllPosts = false;
       const buttons = document.querySelectorAll('.filter-btn');
       
       buttons.forEach(btn => {
@@ -864,13 +1065,7 @@
         }
       });
 
-      articles.forEach(article => {
-        if (category === 'all' || article.dataset.category === category) {
-          article.style.display = 'block';
-        } else {
-          article.style.display = 'none';
-        }
-      });
+      renderPosts();
     }
 
     // Story-driven Gallery Lightbox
@@ -935,6 +1130,26 @@
       document.getElementById('essay-modal-meta').textContent = item.meta;
       document.getElementById('essay-modal-title').textContent = item.title;
       document.getElementById('essay-modal-body').innerHTML = item.body;
+
+      const modalImg = document.getElementById('essay-modal-image');
+      if (item.image) {
+        modalImg.src = item.image;
+        modalImg.alt = item.title;
+        modalImg.classList.remove('hidden');
+      } else {
+        modalImg.src = '';
+        modalImg.classList.add('hidden');
+      }
+
+      const modalLink = document.getElementById('essay-modal-link');
+      const modalFooter = document.getElementById('essay-modal-footer');
+      if (item.linkedinUrl) {
+        modalLink.href = item.linkedinUrl;
+        modalFooter.classList.remove('hidden');
+      } else {
+        modalFooter.classList.add('hidden');
+      }
+
       const modal = document.getElementById('essay-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -956,6 +1171,9 @@
         stepLightbox(-1);
       }
     });
+
+    syncThemeButtons();
+    renderPosts();
   </script>
 </body>
 </html>
